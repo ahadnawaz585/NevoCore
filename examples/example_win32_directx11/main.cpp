@@ -457,7 +457,12 @@ int main(int, char**)
                             double loadPercentage = optimizer.getCurrentLoadPercentage();
 
                             // Method 1: Using std::to_string()
-                            std::string overall_optimized_in_percentage_string = std::to_string(loadPercentage) + "%";
+                            std::string overall_optimized_in_percentage_string = ([](double val) {
+                                std::ostringstream stream;
+                                stream << std::fixed << std::setprecision(2) << val;
+                                return stream.str();
+                                })(loadPercentage) + "%";
+
                             ImGui::SelectButtons("optimized_widget", "Optimized", ImGui::GetColorU32(c::yellow), overall_optimized_in_percentage_string.c_str(), "Your PC could run smoother", overall_optimized_in_percentage);
 
                             ImGui::SetCursorPos(ImVec2(73, 214));
@@ -589,11 +594,16 @@ int main(int, char**)
                                 ImGui::PopFont();
                             }
                             ImGui::EndChild();
-                        };
+                        };  
                         ImGui::EndGroup();
                         ImGui::SetCursorPos(ImVec2(125, 165));
                         double loadPercentage = optimizer.getCurrentLoadPercentage();
-                        std::string overall_optimized_in_percentage_string = std::to_string(optimized) + "%";
+                       std::string overall_optimized_in_percentage_string = ([](double val) {
+    std::ostringstream stream;
+    stream << std::fixed << std::setprecision(2) << val;
+    return stream.str();
+})(optimized) + "%";
+
                         ImGui::SelectButtons("optimized_widget", "Optimized", ImGui::GetColorU32(c::green), overall_optimized_in_percentage_string.c_str(), "Your PC runs smooth", overall_optimized_in_percentage);
                         ImGui::SetCursorPos(ImVec2(152, 512));
                         ImGui::Enjoy_Button("Enjoy Gaming!", image::enjoy);

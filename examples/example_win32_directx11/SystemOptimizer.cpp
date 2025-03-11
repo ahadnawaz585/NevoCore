@@ -105,7 +105,8 @@ double SystemOptimizer::getCurrentLoadPercentage() {
     std::cout << "Network Bytes: " << currentMetrics.networkBytes << " / " << maxNetworkBytes << "\n";
     std::cout << "Final Load: " << (cpuContribution + ramContribution + networkContribution) << "\n";
 
-    return cpuContribution + ramContribution + networkContribution;
+    double result = std::round((cpuContribution + ramContribution + networkContribution) / 3.0 * 100) / 100.0;
+    return result;
 }
 
 void SystemOptimizer::logEvent(const std::string& message) {
@@ -760,6 +761,34 @@ bool SystemOptimizer::performSystemRestore(SystemMetrics& before, SystemMetrics&
     return result;
 }
 
+double calculatePercentage
+(SystemMetrics& before, SystemMetrics& after) {
+    double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
+    double cpuChange = abs(after.cpuUsage - before.cpuUsage);
+    double ramPercentChange = (before.ramAvailable != 0)
+        ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
+        : 0.0;
+
+    double cpuPercentChange = (before.cpuUsage != 0)
+        ? (cpuChange / before.cpuUsage) * 100.0
+        : 0.0;
+
+    double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
+    double networkPercentChange = (before.networkBytes != 0)
+        ? (networkChange * 1024.0 / before.networkBytes) * 100.0
+        : 0.0;
+
+    long long totalRam = before.ramAvailable + after.ramAvailable;
+    double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
+
+    double totalCpu = before.cpuUsage + after.cpuUsage;
+    double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
+
+    long long totalNetwork = before.networkBytes + after.networkBytes;
+    double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
+    double result = std::round((ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0 * 100) / 100.0;
+    return result;
+}
 
 
 
@@ -807,33 +836,9 @@ double SystemOptimizer::run(const std::string& choice) {
                  optimized = cpuReduction;
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
-            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
-            double ramPercentChange = (before.ramAvailable != 0)
-                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
-                : 0.0;
+            
 
-            double cpuPercentChange = (before.cpuUsage != 0)
-                ? (cpuChange / before.cpuUsage) * 100.0
-                : 0.0;
-
-            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
-            double networkPercentChange = (before.networkBytes != 0)
-                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
-                : 0.0;
-
-            long long totalRam = before.ramAvailable + after.ramAvailable;
-            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
-
-            double totalCpu = before.cpuUsage + after.cpuUsage;
-            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
-
-            long long totalNetwork = before.networkBytes + after.networkBytes;
-            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
-
-            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
-
-            optimized = cpuPercentageOfWhole;
+            optimized = calculatePercentage(before, after);
         }
         else if (choice == "2") {
             cout << "\nStarting Advanced Optimization...\n";
@@ -866,33 +871,7 @@ double SystemOptimizer::run(const std::string& choice) {
             optimized = cpuReduction;
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
-            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
-            double ramPercentChange = (before.ramAvailable != 0)
-                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
-                : 0.0;
-
-            double cpuPercentChange = (before.cpuUsage != 0)
-                ? (cpuChange / before.cpuUsage) * 100.0
-                : 0.0;
-
-            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
-            double networkPercentChange = (before.networkBytes != 0)
-                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
-                : 0.0;
-
-            long long totalRam = before.ramAvailable + after.ramAvailable;
-            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
-
-            double totalCpu = before.cpuUsage + after.cpuUsage;
-            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
-
-            long long totalNetwork = before.networkBytes + after.networkBytes;
-            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
-
-            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
-
-            optimized = cpuPercentageOfWhole;
+            optimized = calculatePercentage(before, after);
         }
         else if (choice == "3") {
             cout << "\nStarting Extreme Optimization...\n";
@@ -957,33 +936,7 @@ double SystemOptimizer::run(const std::string& choice) {
             optimized = cpuReduction;
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
-            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
-            double ramPercentChange = (before.ramAvailable != 0)
-                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
-                : 0.0;
-
-            double cpuPercentChange = (before.cpuUsage != 0)
-                ? (cpuChange / before.cpuUsage) * 100.0
-                : 0.0;
-
-            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
-            double networkPercentChange = (before.networkBytes != 0)
-                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
-                : 0.0;
-
-            long long totalRam = before.ramAvailable + after.ramAvailable;
-            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
-
-            double totalCpu = before.cpuUsage + after.cpuUsage;
-            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
-
-            long long totalNetwork = before.networkBytes + after.networkBytes;
-            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
-
-            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
-
-            optimized = cpuPercentageOfWhole;
+            optimized = calculatePercentage(before, after);
         }
         else if (choice == "4") {
             cout << "\nStarting Restore Operation...\n";
@@ -998,16 +951,12 @@ double SystemOptimizer::run(const std::string& choice) {
             Sleep(2000);
             SystemMetrics after = getSystemMetrics();
 
-            // Calculate changes
-            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
-            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
-
             // Log the results
             std::stringstream logSS;
-            logSS << "System restore completed - RAM change: "
+           /* logSS << "System restore completed - RAM change: "
                 << (after.ramAvailable > before.ramAvailable ? "+" : "-") << ramChange
                 << " MB, CPU change: "
-                << (after.cpuUsage > before.cpuUsage ? "+" : "-") << cpuChange << "%";
+                << (after.cpuUsage > before.cpuUsage ? "+" : "-") << cpuChange << "%";*/
             logEvent(logSS.str());
 
             cout << "\nRestore Results:\n";
@@ -1017,32 +966,7 @@ double SystemOptimizer::run(const std::string& choice) {
                 << abs(after.cpuUsage - before.cpuUsage) << "%\n";
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-
-            double ramPercentChange = (before.ramAvailable != 0)
-                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
-                : 0.0;
-
-            double cpuPercentChange = (before.cpuUsage != 0)
-                ? (cpuChange / before.cpuUsage) * 100.0
-                : 0.0;
-
-            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
-            double networkPercentChange = (before.networkBytes != 0)
-                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
-                : 0.0;
-
-            long long totalRam = before.ramAvailable + after.ramAvailable;
-            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
-
-            double totalCpu = before.cpuUsage + after.cpuUsage;
-            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
-
-            long long totalNetwork = before.networkBytes + after.networkBytes;
-            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
-
-            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
-
-            optimized = cpuPercentageOfWhole;
+            optimized = calculatePercentage(before, after);
           
 
             logEvent("Optimization completed successfully");
