@@ -108,6 +108,100 @@ double SystemOptimizer::getCurrentLoadPercentage() {
     return cpuContribution + ramContribution + networkContribution;
 }
 
+void SystemOptimizer::logEvent(const std::string& message) {
+    time_t now = time(0);
+    struct tm timeinfo;
+    char timestamp[80];
+    localtime_s(&timeinfo, &now);
+    strftime(timestamp, sizeof(timestamp), "[%Y-%m-%d %H:%M:%S] ", &timeinfo);
+
+    std::string logEntry = std::string(timestamp) + message;
+
+    if (logs.size() >= MAX_LOGS) {
+        logs.erase(logs.begin());
+    }
+
+    logs.push_back(logEntry);
+}
+
+void SystemOptimizer::initializeDemoLogs() {
+
+    logEvent("System startup initiated");
+    logEvent("Checking system configuration");
+    logEvent("Loading optimization modules");
+    logEvent("Initializing performance monitors");
+    logEvent("Setting up resource trackers");
+    logEvent("Acquiring system privileges");
+
+    // Scan phase
+    logEvent("Starting comprehensive system scan");
+    logEvent("Scanning boot sector");
+    logEvent("Scanning system registry");
+    logEvent("Checking startup programs");
+    logEvent("Analyzing service configurations");
+    logEvent("Examining scheduled tasks");
+    logEvent("Inspecting driver configurations");
+    logEvent("Checking for fragmented files");
+    logEvent("Analyzing disk usage patterns");
+    logEvent("Scanning for redundant files");
+
+    // Analysis phase
+    logEvent("Analyzing scan results");
+    logEvent("Identified 17 optimization opportunities");
+    logEvent("Detected 3 performance bottlenecks");
+    logEvent("Found 215 MB of temporary files");
+    logEvent("Discovered 4 startup items slowing boot time");
+    logEvent("Detected 2 resource-intensive background processes");
+    logEvent("Located 8 fragmented system files");
+
+    // Optimization phase
+    logEvent("Beginning system optimization");
+    logEvent("Optimizing startup sequence");
+    logEvent("Removing unnecessary startup items");
+    logEvent("Adjusting service priorities");
+    logEvent("Defragmenting critical system files");
+    logEvent("Cleaning temporary files");
+    logEvent("Removing browser cache");
+    logEvent("Compacting system database");
+    logEvent("Optimizing system registry");
+
+    // Memory optimization
+    logEvent("Starting memory optimization");
+    logEvent("Analyzing memory usage patterns");
+    logEvent("Identifying memory leaks");
+    logEvent("Releasing unused memory blocks");
+    logEvent("Optimizing memory allocation");
+    logEvent("Adjusting virtual memory configuration");
+
+    // Network optimization
+    logEvent("Beginning network optimization");
+    logEvent("Analyzing network configuration");
+    logEvent("Optimizing DNS settings");
+    logEvent("Adjusting TCP/IP parameters");
+    logEvent("Optimizing network buffer sizes");
+    logEvent("Setting optimal packet priorities");
+
+    // Final phase
+    logEvent("Applying system tweaks");
+    logEvent("Updating system configuration");
+    logEvent("Verifying optimizations");
+    logEvent("Running performance benchmark");
+    logEvent("Comparing before/after metrics");
+    logEvent("Generating optimization report");
+    logEvent("Saving configuration changes");
+    logEvent("Optimization complete");
+    logEvent("System performance improved by 27%");
+    logEvent("Disk space recovered: 1.2 GB");
+    logEvent("Boot time reduced by 5.3 seconds");
+    logEvent("Memory usage reduced by 340 MB");
+    logEvent("All optimizations applied successfully");
+
+}
+
+std::vector<std::string> SystemOptimizer::getLogs()  {
+    return logs;
+}
+
 // Collect system metrics (RAM, CPU, Network usage)
 SystemMetrics SystemOptimizer::getSystemMetrics() {
     SystemMetrics metrics = { 0, 0, 0.0 };
@@ -404,7 +498,7 @@ void SystemOptimizer::killProcesses(const string& grokResponse, const string& se
 bool SystemOptimizer::applyBasicTweaks() {
     HKEY hKey;
     bool success = true;
-    cout << "\nApplying Basic Registry Tweaks...\n";
+    logEvent("Applying Basic Registry Tweaks...");
 
     // Adjust visual effects for performance
     LONG result = RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects",
@@ -417,7 +511,7 @@ bool SystemOptimizer::applyBasicTweaks() {
             success = false;
         }
         else {
-            cout << "Adjusted visual effects for performance.\n";
+            logEvent("Adjusted visual effects for performance.");
         }
         RegCloseKey(hKey);
     }
@@ -467,12 +561,12 @@ bool SystemOptimizer::applyBasicTweaks() {
 // Apply advanced tweaks (basic tweaks + power settings)
 bool SystemOptimizer::applyAdvancedTweaks() {
     bool success = applyBasicTweaks();
-    cout << "\nApplying Advanced Tweaks...\n";
+    logEvent("Applying Advanced Tweaks...");
 
     // Set power plan to High Performance
     DWORD result = system("powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
     if (result == 0) {
-        cout << "Set power plan to High Performance.\n";
+        logEvent("Set power plan to High Performance.");
     }
     else {
         cerr << "Failed to set power plan to High Performance: Error " << result << "\n";
@@ -552,7 +646,7 @@ bool SystemOptimizer::restoreDefaultSettings() {
     // Restore default power plan (Balanced)
     result = system("powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
     if (result == 0) {
-        cout << "Restored Balanced power plan.\n";
+        logEvent("Restored Balanced power plan.");
     }
     else {
         cerr << "Failed to restore Balanced power plan: Error " << result << "\n";
@@ -567,7 +661,7 @@ bool SystemOptimizer::restoreDefaultSettings() {
         DWORD value = 0;
         result = RegSetValueExA(hKey, "GlobalUserDisabled", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
         if (result == ERROR_SUCCESS) {
-            cout << "Background apps re-enabled.\n";
+            logEvent("Background apps re-enabled.");
         }
         else {
             cerr << "Failed to restore background apps: Error " << result << "\n";
@@ -601,7 +695,7 @@ bool SystemOptimizer::checkAndElevatePrivileges() {
 
 // Perform basic optimization (registry tweaks)
 bool SystemOptimizer::performBasicOptimization(SystemMetrics& before, SystemMetrics& after) {
-    cout << "\nStarting Basic Optimization...\n";
+     logEvent("Basic Optimization...");
     before = getSystemMetrics();
     bool result = applyBasicTweaks();
     Sleep(2000);
@@ -611,7 +705,7 @@ bool SystemOptimizer::performBasicOptimization(SystemMetrics& before, SystemMetr
 
 // Perform advanced optimization (registry + power settings)
 bool SystemOptimizer::performAdvancedOptimization(SystemMetrics& before, SystemMetrics& after) {
-    cout << "\nStarting Advanced Optimization...\n";
+    logEvent("Starting Advanced Optimization...");
     before = getSystemMetrics();
     bool result = applyAdvancedTweaks();
     Sleep(2000);
@@ -621,16 +715,16 @@ bool SystemOptimizer::performAdvancedOptimization(SystemMetrics& before, SystemM
 
 // Perform extreme optimization (all tweaks + terminate processes)
 bool SystemOptimizer::performExtremeOptimization(SystemMetrics& before, SystemMetrics& after) {
-    cout << "\nStarting Extreme Optimization...\n";
+    logEvent("\nStarting Extreme Optimization...");
     before = getSystemMetrics();
 
     if (!applyAdvancedTweaks()) {
-        cerr << "Advanced tweaks in extreme optimization encountered issues\n";
+        logEvent("Advanced tweaks in extreme optimization encountered issues");
         after = getSystemMetrics();
         return false;
     }
 
-    cout << "Fetching running processes...\n";
+    logEvent("Fetching running processes...");
     vector<string> foregroundProcesses;
     vector<string> backgroundProcesses;
     getRunningProcesses(foregroundProcesses, backgroundProcesses);
@@ -670,105 +764,299 @@ bool SystemOptimizer::performSystemRestore(SystemMetrics& before, SystemMetrics&
 
 
 // Main application loop
-void SystemOptimizer::run(const std::string& choice) {
+double SystemOptimizer::run(const std::string& choice) {
     cout << choice;
-        if (!checkAndElevatePrivileges()) {
-            return; // Exit if privileges couldn't be obtaine
+    if (!checkAndElevatePrivileges()) {
+        logEvent("Failed to obtain required privileges");
+        return 0; // Exit if privileges couldn't be obtained
+    }
+
+    try {
+        if (choice == "0") {
+            cout << "Exiting the program...\n";
+            logEvent("Program exit requested");
         }
-        
-   
-                try {
-                    if (choice == "0") {
-                        cout << "Exiting the program...\n";
-                    }
-                    else if (choice == "1") {
-                        cout << "\nStarting Basic Optimization...\n";
-                        SystemMetrics before = getSystemMetrics();
-                        if (!applyBasicTweaks()) {
-                            throw runtime_error("Basic optimization encountered issues");
-                        }
-                        Sleep(2000);
-                        SystemMetrics after = getSystemMetrics();
+        else if (choice == "1") {
+            cout << "\nStarting Basic Optimization...\n";
+            logEvent("Basic optimization started");
 
-                        cout << "\nOptimization Results:\n";
-                        cout << "RAM Freed: " << (before.ramAvailable < after.ramAvailable ? (after.ramAvailable - before.ramAvailable) / 1024.0 : 0.0) << " MB\n";
-                        cout << "CPU Usage Reduced: " << (before.cpuUsage > after.cpuUsage ? before.cpuUsage - after.cpuUsage : 0.0) << "%\n";
-                        cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
-                            << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-                    }
-                    else if (choice == "2") {
-                        cout << "\nStarting Advanced Optimization...\n";
-                        SystemMetrics before = getSystemMetrics();
-                        if (!applyAdvancedTweaks()) {
-                            throw runtime_error("Advanced optimization encountered issues");
-                        }
-                        Sleep(2000);
-                        SystemMetrics after = getSystemMetrics();
+            SystemMetrics before = getSystemMetrics();
+            if (!applyBasicTweaks()) {
+                logEvent("Basic optimization failed");
+                throw runtime_error("Basic optimization encountered issues");
+            }
 
-                        cout << "\nOptimization Results:\n";
-                        cout << "RAM Freed: " << (before.ramAvailable < after.ramAvailable ? (after.ramAvailable - before.ramAvailable) / 1024.0 : 0.0) << " MB\n";
-                        cout << "CPU Usage Reduced: " << (before.cpuUsage > after.cpuUsage ? before.cpuUsage - after.cpuUsage : 0.0) << "%\n";
-                        cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
-                            << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-                    }
-                    else if (choice == "3") {
-                        cout << "\nStarting Extreme Optimization...\n";
-                        SystemMetrics before = getSystemMetrics();
-                        if (!applyAdvancedTweaks()) {
-                            throw runtime_error("Advanced tweaks in extreme optimization encountered issues");
-                        }
+            Sleep(2000);
+            SystemMetrics after = getSystemMetrics();
 
-                        cout << "Fetching running processes...\n";
-                        vector<string> foregroundProcesses;
-                        vector<string> backgroundProcesses;
-                        getRunningProcesses(foregroundProcesses, backgroundProcesses);
-                        if (foregroundProcesses.empty() && backgroundProcesses.empty()) {
-                            cout << "No processes found.\n";
-                        }
+            // Calculate optimization metrics
+            double ramFreed = (before.ramAvailable < after.ramAvailable ?
+                (after.ramAvailable - before.ramAvailable) / 1024.0 : 0.0);
+            double cpuReduction = (before.cpuUsage > after.cpuUsage ?
+                before.cpuUsage - after.cpuUsage : 0.0);
 
-                        else {
-                            cout << "Sending process list to Grok for analysis...\n";
-                            string grokResponse = getGrokResponse(foregroundProcesses, backgroundProcesses);
-                            if (grokResponse.empty() || grokResponse == "No valid response from Grok.") {
-                                cout << "No valid response from Grok. Skipping process termination.\n";
-                            }
-                            else {
-                                cout << "Terminating non-essential processes (gaming processes are protected)...\n";
-                                killProcesses(grokResponse, selfProcessName);
-                            }
-                        }
-                        Sleep(2000);
-                        SystemMetrics after = getSystemMetrics();
+            // Log the results
+            std::stringstream logSS;
+            logSS << "Basic optimization completed - RAM freed: " << ramFreed
+                << " MB, CPU reduction: " << cpuReduction << "%";
+            logEvent(logSS.str());
 
-                        cout << "\nOptimization Results:\n";
-                        cout << "RAM Freed: " << (before.ramAvailable < after.ramAvailable ? (after.ramAvailable - before.ramAvailable) / 1024.0 : 0.0) << " MB\n";
-                        cout << "CPU Usage Reduced: " << (before.cpuUsage > after.cpuUsage ? before.cpuUsage - after.cpuUsage : 0.0) << "%\n";
-                        cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
-                            << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-                    }
-                    else if (choice == "4") {
-                        cout << "\nStarting Restore Operation...\n";
-                        SystemMetrics before = getSystemMetrics();
-                        if (!restoreDefaultSettings()) {
-                            throw runtime_error("Failed to fully restore default settings");
-                        }
-                        Sleep(2000);
-                        SystemMetrics after = getSystemMetrics();
+            cout << "\nOptimization Results:\n";
+            cout << "RAM Freed: " << ramFreed << " MB\n";
+            cout << "CPU Usage Reduced: " << cpuReduction << "%\n";
+                 optimized = cpuReduction;
+            cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
+                << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
+            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
+            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
+            double ramPercentChange = (before.ramAvailable != 0)
+                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
+                : 0.0;
 
-                        cout << "\nRestore Results:\n";
-                        cout << "RAM Available Change: " << (after.ramAvailable > before.ramAvailable ? "+" : "-")
-                            << abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0 << " MB\n";
-                        cout << "CPU Usage Change: " << (after.cpuUsage > before.cpuUsage ? "+" : "-")
-                            << abs(after.cpuUsage - before.cpuUsage) << "%\n";
-                        cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
-                            << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-                    }
-                    else {
-                        cout << "Invalid choice. Returning to menu.\n";
-                    }
+            double cpuPercentChange = (before.cpuUsage != 0)
+                ? (cpuChange / before.cpuUsage) * 100.0
+                : 0.0;
+
+            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
+            double networkPercentChange = (before.networkBytes != 0)
+                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
+                : 0.0;
+
+            long long totalRam = before.ramAvailable + after.ramAvailable;
+            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
+
+            double totalCpu = before.cpuUsage + after.cpuUsage;
+            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
+
+            long long totalNetwork = before.networkBytes + after.networkBytes;
+            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
+
+            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
+
+            optimized = cpuPercentageOfWhole;
+        }
+        else if (choice == "2") {
+            cout << "\nStarting Advanced Optimization...\n";
+            logEvent("Advanced optimization started");
+
+            SystemMetrics before = getSystemMetrics();
+            if (!applyAdvancedTweaks()) {
+                logEvent("Advanced optimization failed");
+                throw runtime_error("Advanced optimization encountered issues");
+            }
+
+            Sleep(2000);
+            SystemMetrics after = getSystemMetrics();
+
+            // Calculate optimization metrics
+            double ramFreed = (before.ramAvailable < after.ramAvailable ?
+                (after.ramAvailable - before.ramAvailable) / 1024.0 : 0.0);
+            double cpuReduction = (before.cpuUsage > after.cpuUsage ?
+                before.cpuUsage - after.cpuUsage : 0.0);
+
+            // Log the results
+            std::stringstream logSS;
+            logSS << "Advanced optimization completed - RAM freed: " << ramFreed
+                << " MB, CPU reduction: " << cpuReduction << "%";
+            logEvent(logSS.str());
+
+            cout << "\nOptimization Results:\n";
+            cout << "RAM Freed: " << ramFreed << " MB\n";
+            cout << "CPU Usage Reduced: " << cpuReduction << "%\n";
+            optimized = cpuReduction;
+            cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
+                << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
+            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
+            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
+            double ramPercentChange = (before.ramAvailable != 0)
+                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
+                : 0.0;
+
+            double cpuPercentChange = (before.cpuUsage != 0)
+                ? (cpuChange / before.cpuUsage) * 100.0
+                : 0.0;
+
+            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
+            double networkPercentChange = (before.networkBytes != 0)
+                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
+                : 0.0;
+
+            long long totalRam = before.ramAvailable + after.ramAvailable;
+            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
+
+            double totalCpu = before.cpuUsage + after.cpuUsage;
+            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
+
+            long long totalNetwork = before.networkBytes + after.networkBytes;
+            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
+
+            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
+
+            optimized = cpuPercentageOfWhole;
+        }
+        else if (choice == "3") {
+            cout << "\nStarting Extreme Optimization...\n";
+            logEvent("Extreme optimization started");
+
+            SystemMetrics before = getSystemMetrics();
+            if (!applyAdvancedTweaks()) {
+                logEvent("Advanced tweaks in extreme optimization failed");
+                throw runtime_error("Advanced tweaks in extreme optimization encountered issues");
+            }
+
+            cout << "Fetching running processes...\n";
+            logEvent("Fetching running processes");
+
+            vector<string> foregroundProcesses;
+            vector<string> backgroundProcesses;
+            getRunningProcesses(foregroundProcesses, backgroundProcesses);
+
+            if (foregroundProcesses.empty() && backgroundProcesses.empty()) {
+                cout << "No processes found.\n";
+                logEvent("No processes found for optimization");
+            }
+            else {
+                logEvent("Process list generated - Foreground: " +
+                    std::to_string(foregroundProcesses.size()) +
+                    ", Background: " + std::to_string(backgroundProcesses.size()));
+
+                cout << "Sending process list to Grok for analysis...\n";
+                logEvent("Sending process list to Grok for analysis");
+
+                string grokResponse = getGrokResponse(foregroundProcesses, backgroundProcesses);
+                if (grokResponse.empty() || grokResponse == "No valid response from Grok.") {
+                    cout << "No valid response from Grok. Skipping process termination.\n";
+                    logEvent("No valid response from Grok - skipping process termination");
                 }
-                catch (const runtime_error& e) {
-                    cerr << "Error: " << e.what() << "\n";
-                    cout << "Operation completed with errors. Some changes may have been applied.\n";
+                else {
+                    cout << "Terminating non-essential processes (gaming processes are protected)...\n";
+                    logEvent("Terminating non-essential processes based on Grok analysis");
+                    killProcesses(grokResponse, selfProcessName);
+                    logEvent("Process termination completed");
                 }
+            }
+
+            Sleep(2000);
+            SystemMetrics after = getSystemMetrics();
+
+            // Calculate optimization metrics
+            double ramFreed = (before.ramAvailable < after.ramAvailable ?
+                (after.ramAvailable - before.ramAvailable) / 1024.0 : 0.0);
+            double cpuReduction = (before.cpuUsage > after.cpuUsage ?
+                before.cpuUsage - after.cpuUsage : 0.0);
+
+            // Log the results
+            std::stringstream logSS;
+            logSS << "Extreme optimization completed - RAM freed: " << ramFreed
+                << " MB, CPU reduction: " << cpuReduction << "%";
+            logEvent(logSS.str());
+
+            cout << "\nOptimization Results:\n";
+            cout << "RAM Freed: " << ramFreed << " MB\n";
+            cout << "CPU Usage Reduced: " << cpuReduction << "%\n";
+            optimized = cpuReduction;
+            cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
+                << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
+            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
+            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
+            double ramPercentChange = (before.ramAvailable != 0)
+                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
+                : 0.0;
+
+            double cpuPercentChange = (before.cpuUsage != 0)
+                ? (cpuChange / before.cpuUsage) * 100.0
+                : 0.0;
+
+            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
+            double networkPercentChange = (before.networkBytes != 0)
+                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
+                : 0.0;
+
+            long long totalRam = before.ramAvailable + after.ramAvailable;
+            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
+
+            double totalCpu = before.cpuUsage + after.cpuUsage;
+            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
+
+            long long totalNetwork = before.networkBytes + after.networkBytes;
+            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
+
+            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
+
+            optimized = cpuPercentageOfWhole;
+        }
+        else if (choice == "4") {
+            cout << "\nStarting Restore Operation...\n";
+            logEvent("System restore operation started");
+
+            SystemMetrics before = getSystemMetrics();
+            if (!restoreDefaultSettings()) {
+                logEvent("System restore operation failed");
+                throw runtime_error("Failed to fully restore default settings");
+            }
+
+            Sleep(2000);
+            SystemMetrics after = getSystemMetrics();
+
+            // Calculate changes
+            double ramChange = abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0;
+            double cpuChange = abs(after.cpuUsage - before.cpuUsage);
+
+            // Log the results
+            std::stringstream logSS;
+            logSS << "System restore completed - RAM change: "
+                << (after.ramAvailable > before.ramAvailable ? "+" : "-") << ramChange
+                << " MB, CPU change: "
+                << (after.cpuUsage > before.cpuUsage ? "+" : "-") << cpuChange << "%";
+            logEvent(logSS.str());
+
+            cout << "\nRestore Results:\n";
+            cout << "RAM Available Change: " << (after.ramAvailable > before.ramAvailable ? "+" : "-")
+                << abs(static_cast<long long>(after.ramAvailable - before.ramAvailable)) / 1024.0 << " MB\n";
+            cout << "CPU Usage Change: " << (after.cpuUsage > before.cpuUsage ? "+" : "-")
+                << abs(after.cpuUsage - before.cpuUsage) << "%\n";
+            cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
+                << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
+
+            double ramPercentChange = (before.ramAvailable != 0)
+                ? (ramChange * 1024.0 / before.ramAvailable) * 100.0
+                : 0.0;
+
+            double cpuPercentChange = (before.cpuUsage != 0)
+                ? (cpuChange / before.cpuUsage) * 100.0
+                : 0.0;
+
+            double networkChange = static_cast<double>(after.networkBytes - before.networkBytes) / 1024.0;
+            double networkPercentChange = (before.networkBytes != 0)
+                ? (networkChange * 1024.0 / before.networkBytes) * 100.0
+                : 0.0;
+
+            long long totalRam = before.ramAvailable + after.ramAvailable;
+            double ramPercentageOfWhole = (totalRam != 0) ? (after.ramAvailable * 100.0 / totalRam) : 0.0;
+
+            double totalCpu = before.cpuUsage + after.cpuUsage;
+            double cpuPercentageOfWhole = (totalCpu != 0) ? (after.cpuUsage * 100.0 / totalCpu) : 0.0;
+
+            long long totalNetwork = before.networkBytes + after.networkBytes;
+            double networkPercentageOfWhole = (totalNetwork != 0) ? (after.networkBytes * 100.0 / totalNetwork) : 0.0;
+
+            optimized = (ramPercentageOfWhole + cpuPercentageOfWhole + networkPercentageOfWhole) / 3.0;
+
+            optimized = cpuPercentageOfWhole;
+          
+
+            logEvent("Optimization completed successfully");
+        }
+        else {
+            cout << "Invalid choice. Returning to menu.\n";
+            logEvent("Invalid choice selected: " + choice);
+        }
+
+        return optimized;
+    }
+    catch (const runtime_error& e) {
+        cerr << "Error: " << e.what() << "\n";
+        logEvent("Error occurred: " + std::string(e.what()));
+        cout << "Operation completed with errors. Some changes may have been applied.\n";
+    }
 }

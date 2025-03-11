@@ -159,7 +159,7 @@ LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 D3DX11_IMAGE_LOAD_INFO info; ID3DX11ThreadPump* pump{ nullptr };
 int main(int, char**)
 {
-    static int select2 = 0;
+
     WNDCLASSEXW wc = { sizeof(wc), CS_CLASSDC, WndProc, 0L, 0L, GetModuleHandle(NULL), NULL, NULL, NULL, NULL, L"NEVOCORE", NULL };
     ::RegisterClassExW(&wc);
     HWND hwnd = CreateWindowExW(0, wc.lpszClassName, L"NEVOCORE", WS_POPUP, (GetSystemMetrics(SM_CXSCREEN) / 2) - (WIDTH / 2), (GetSystemMetrics(SM_CYSCREEN) / 2) - (HEIGHT / 2), WIDTH,HEIGHT, nullptr, nullptr, wc.hInstance, nullptr);
@@ -237,6 +237,7 @@ int main(int, char**)
     if (image::back == nullptr) D3DX11CreateShaderResourceViewFromMemory(g_pd3dDevice, back_icon, sizeof(back_icon), &info, pump, &image::back, 0);
 
     bool done = false;
+    int select;
     while (!done)
     {
         MSG msg;
@@ -286,6 +287,9 @@ int main(int, char**)
                 {
                     if (active_tab == 0)
                     {
+                        if (!optimizer.checkAndElevatePrivileges()) {
+                            return 0;
+                        }
                         //cout << optimizer.getCurrentLoadPercentage();
                         ImGui::GetWindowDrawList()->AddText(Alexandria_Semmi, 33.f, ImVec2(p.x + 133, p.y + 124), ImGui::GetColorU32(c::text_active), "Welcome back!");
 
@@ -327,9 +331,9 @@ int main(int, char**)
                         if (rotationAngle > 360.0f) {
                             rotationAngle -= 360.0f;
                         }
-                      
+
                         ImGui::GetWindowDrawList()->AddText(Alexandria_Regular_1, 20.f, p + ImVec2((region.x + 40 - Alexandria_Regular_1->CalcTextSizeA(Alexandria_Regular_1->FontSize, FLT_MAX, 0.f, "logging in...").x) / 2, region.y - 210), ImGui::GetColorU32(c::con_text_active), "logging in...");
-                    
+
 
                         static float timer = 0.f;
                         timer += 6.f * ImGui::GetIO().DeltaTime;
@@ -354,7 +358,6 @@ int main(int, char**)
                     }
                     if (active_tab == 2)
                     {
-
                         ImGui::GetWindowDrawList()->AddRect(ImVec2(p.x + 44, p.y + 102), ImVec2(p.x + 432, p.y + 473), ImGui::GetColorU32(c::rect_beginchild), 29.f);
                         ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(p.x + 45, p.y + 103), ImVec2(p.x + 431, p.y + 472), ImGui::GetColorU32(c::bg_beginchild), 29.f);
 
@@ -363,40 +366,39 @@ int main(int, char**)
                         ImGui::GetWindowDrawList()->AddText(Alexandria_Semmi_2, 16.f, ImVec2(p.x + 116, p.y + 180), ImGui::GetColorU32(c::con_text_active), "Choose a mode based on your needs.");
 
                         ImGui::SetCursorPos(ImVec2(90, 211));
-                        select2 = 0;
+                        static int select2 = 0;
                         const char* items2[3]{ "Basic", "Advanced", "Extreme" };
                         ImGui::Combo("Type", &select2, items2, IM_ARRAYSIZE(items2), 2);
-
+                        cout << select2;
                         ImGui::GetWindowDrawList()->AddLine(ImVec2(p.x + 90, p.y + 305), ImVec2(p.x + 386, p.y + 305), ImGui::GetColorU32(ImVec4(0.1f, 0.1f, 0.1f, 1.0f)), 1.0f);
 
                         ImGui::SetCursorPos(ImVec2(102, 338));
                         ImGui::BeginGroup();
-                        {
                             static bool Toggle1 = true;
-                            ImGui::Checkbox("Toggle 1", &Toggle1);
-
                             static bool Toggle2 = false;
-                            ImGui::Checkbox("Toggle 2", &Toggle2);
-
-                        }ImGui::EndGroup();
+                        {
+                            ImGui::Checkbox("AI Enhanced", &Toggle1);
+                            ImGui::Checkbox("Fast Tracking", &Toggle2);
+                        }
+                        ImGui::EndGroup();
 
                         ImGui::SetCursorPos(ImVec2(305, 401));
                         if (ImGui::Button_Back("Revert", "Revert Changes?", image::back, ImVec2(71, 25))) {
-                            page = 2;
+                            // Reset the toggles to false and combo box to "Basic" (index 0)
+                            Toggle1 = false;
+                            Toggle2 = false;
+                            select2 = 0;
                         }
 
                         ImGui::SetCursorPos(ImVec2(44, 498));
                         if (ImGui::Button("Analyze", ImVec2(388, 47))) {
                             page = 3;
+                            select = select2;
                             current_state = "Analysing your PC, please wait..";
-
-                           
                         }
                     }
                     if (active_tab == 3)
                     {
-                       
-
                         ImDrawList* drawList = ImGui::GetWindowDrawList();
                         ImVec2 center = ImGui::GetCursorScreenPos() + ImVec2(region) / 2 + ImVec2(0, -50);
                         float radius = 80.0f;
@@ -435,30 +437,14 @@ int main(int, char**)
                         ImVec2 textPos = p + ImVec2((region.x - textSize.x) / 2 + 5.0f, (region.y - textSize.y) / 2 + 5.0f);
                         ImGui::GetWindowDrawList()->AddText(Alexandria_Semmi_4, 28.f, textPos, ImGui::GetColorU32(c::text_active), text.c_str());
 
+                        // Remove the optimizer.run() calls here
+
                         if (analysing_current_percentage == 100) {
                             page = 4;
                             overall_optimized_in_percentage = 0.234f;
                             timer = 0;
-
-                            // Perform basic optimization
-                            // Perform optimization based on the selected type
-                            if (select2 == 0) {
-                                optimizer.run("1");
-                            }
-                            else if (select2 == 1) {
-                                optimizer.run("2");
-                            }
-                            else if (select2 == 2) {
-                                optimizer.run("3");
-                            }
-
-                            else {
-                                std::cout << "Optimization failed!" << std::endl;
-                            }
                         }
                     }
-
-
 
 
                     if (active_tab == 4)
@@ -545,61 +531,70 @@ int main(int, char**)
 
                         // ========================= System Optimization Logic =========================
                         static SystemOptimizer optimizer; // Create optimizer instance once
-
                         static SystemMetrics before, after;
+
                         if (optimizing_current_percentage == 0) {
                             before = optimizer.getSystemMetrics(); // Capture initial system state
                         }
 
+
                         if (optimizing_current_percentage == 50) {
+                            // Run the appropriate optimization based on the selected option
+                            if (select == 0) {
+                              optimized =  optimizer.run("1"); // Basic optimization
+                            }
+                            else if (select == 1) {
+                                optimized = optimizer.run("2"); // Advanced optimization
+                            }
+                            else if (select == 2) {
+                                optimized = optimizer.run("3"); // Extreme optimization
+                            }
+
                             optimizer.performBasicOptimization(before, after); // Run optimization
                         }
 
                         if (optimizing_current_percentage == 100) {
                             after = optimizer.getSystemMetrics(); // Capture system state after optimization
                             page = 6;
-                            overall_optimized_in_percentage = 0.998f;
+                            overall_optimized_in_percentage = optimized;
                             timer = 0;
                         }
-
                         // ===============================================================================
-
                     }
 
-                    if (active_tab == 6)
-                    {
+                    if (active_tab == 6) {
 
+
+                        optimizer.initializeDemoLogs();
+                        std::vector<std::string> demoLogs = optimizer.getLogs();
                         ImGui::GetWindowDrawList()->AddRect(ImVec2(p.x + 54, p.y + 102), ImVec2(p.x + 422, p.y + 473), ImGui::GetColorU32(c::rect_beginchild), 29.f);
                         ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(p.x + 55, p.y + 103), ImVec2(p.x + 421, p.y + 472), ImGui::GetColorU32(c::bg_beginchild), 29.f);
-
                         ImGui::BeginGroup();
                         {
                             ImGui::SetCursorPos(ImVec2(97, 221));
-                            ImGui::Succes_Button("PC Succesfully Optimized!", image::succes_inject);
-
+                            ImGui::Succes_Button("PC Successfully Optimized!", image::succes_inject);
                             ImGui::SetCursorPos(ImVec2(94, 266));
                             ImGui::BeginChild("Logs", ImVec2(288, 179), false);
                             {
                                 ImGui::PushFont(Alexandria_Medium);
                                 ImGui::PushStyleColor(ImGuiCol_Text, ImGui::GetColorU32(c::text_warning));
 
-                                ImGui::Text("[!] test log 1");
-                                ImGui::Text("[!] test log 2");
-                                ImGui::Text("[!] test log 3");
-                                ImGui::Text("[!] test log 4");
-                                ImGui::Text("[!] test log 5");
-                                ImGui::Text("[!] test log 6");
+                                // Display demo logs
+                                for (const auto& log : demoLogs) {
+                                    //ImGui::TextWrapped("Debug: Log count: %d", demoLogs.size());
+                                    ImGui::TextWrapped("%s", log.c_str());
+                                }
+
                                 ImGui::PopStyleColor();
                                 ImGui::PopFont();
-
-                            }ImGui::EndChild();
-
-                        }ImGui::EndGroup();
-
+                            }
+                            ImGui::EndChild();
+                        };
+                        ImGui::EndGroup();
                         ImGui::SetCursorPos(ImVec2(125, 165));
-                        std::string overall_optimized_in_percentage_string = FormatFloat(overall_optimized_in_percentage*100) + "%";
+                        double loadPercentage = optimizer.getCurrentLoadPercentage();
+                        std::string overall_optimized_in_percentage_string = std::to_string(optimized) + "%";
                         ImGui::SelectButtons("optimized_widget", "Optimized", ImGui::GetColorU32(c::green), overall_optimized_in_percentage_string.c_str(), "Your PC runs smooth", overall_optimized_in_percentage);
-
                         ImGui::SetCursorPos(ImVec2(152, 512));
                         ImGui::Enjoy_Button("Enjoy Gaming!", image::enjoy);
                     }

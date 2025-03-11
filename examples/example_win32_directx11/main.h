@@ -67,6 +67,7 @@ float fps_optimized_in_percentage = 35.0f;
 float network_optimized_in_percentage = 62.0f;
 float input_delay_optimized_in_percentage = 25.0f;
 float overall_optimized_in_percentage = 0.0f;
+double optimized = 50;
 
 const char* current_state = "";
 
