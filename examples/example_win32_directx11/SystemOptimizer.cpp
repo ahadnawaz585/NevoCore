@@ -100,10 +100,10 @@ double SystemOptimizer::getCurrentLoadPercentage() {
     double networkContribution = (currentMetrics.networkBytes / maxNetworkBytes) * 100 * 0.2;
 
     // Debugging outputs
-    std::cout << "CPU Usage: " << currentMetrics.cpuUsage << "\n";
+ /*   std::cout << "CPU Usage: " << currentMetrics.cpuUsage << "\n";
     std::cout << "RAM Available: " << currentMetrics.ramAvailable << " / " << totalRam << "\n";
     std::cout << "Network Bytes: " << currentMetrics.networkBytes << " / " << maxNetworkBytes << "\n";
-    std::cout << "Final Load: " << (cpuContribution + ramContribution + networkContribution) << "\n";
+    std::cout << "Final Load: " << (cpuContribution + ramContribution + networkContribution) << "\n";*/
 
     // Corrected formula
     double result = std::round((cpuContribution + ramContribution + networkContribution) * 100) / 100.0;
@@ -316,6 +316,7 @@ string SystemOptimizer::getGrokResponse(const vector<string>& foregroundProcesse
     CURL* curl;
     CURLcode res;
     string response;
+    string apiKey = "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"; 
     string url = "https://api.groq.com/openai/v1/chat/completions";
 
     // Convert process lists to strings
@@ -332,8 +333,8 @@ string SystemOptimizer::getGrokResponse(const vector<string>& foregroundProcesse
     if (!bgProcessListStr.empty()) bgProcessListStr = bgProcessListStr.substr(0, bgProcessListStr.size() - 2);
 
     // Updated prompt to explicitly exclude game-related processes
-    string jsonData = R"({"messages": [{"role": "user", "content": "Here's a list of foreground processes: )" + fgProcessListStr +
-        R"(. Here's a list of background processes: )" + bgProcessListStr +
+    string jsonData = R"({"messages": [{"role": "user", "content": "Here’s a list of foreground processes: )" + fgProcessListStr +
+        R"(. Here’s a list of background processes: )" + bgProcessListStr +
         R"(. Return ONLY a comma-separated list of process names that are NOT necessary for Windows operation and NOT related to gaming in any way. Exclude processes essential for Windows stability, FPS, input/output latency, or network performance. Do NOT include any processes related to games, game launchers (e.g., steam.exe, epicgameslauncher.exe), gaming platforms (e.g., discord.exe), or graphics drivers (e.g., nvcontainer.exe). Examples of processes to exclude include chrome.exe, msedge.exe, but NOT steam.exe, epicgameslauncher.exe, discord.exe, or any game executable. Do not include extra text, explanations, or warnings."}],
                       "model": "llama-3.3-70b-versatile", "temperature": 1, "max_completion_tokens": 1024, "top_p": 1, "stream": false, "stop": null})";
 
@@ -374,11 +375,12 @@ string SystemOptimizer::getGrokResponse(const vector<string>& foregroundProcesse
 }
 
 // Terminate processes identified by Grok, with additional local filtering for safety
-void SystemOptimizer::killProcesses(const string& grokResponse, const string& selfProcessName) {
+void SystemOptimizer::killProcesses(const string& grokResponse, const string& selfProcessName, const vector<string>& backgroundProcesses) {
     // Define protected processes (system-critical and game-related)
     DWORD currentPID = GetCurrentProcessId();
     vector<string> protectedProcesses = {
         selfProcessName,       // This program
+        "msvsmon.exe",
         "taskmgr.exe",         // Task Manager
         "explorer.exe",        // Windows Explorer
         "svchost.exe",         // Service Host
@@ -388,7 +390,7 @@ void SystemOptimizer::killProcesses(const string& grokResponse, const string& se
         "winlogon.exe",        // Windows Logon Process
         "dwm.exe",             // Desktop Window Manager
         "fontdrvhost.exe",     // Font Driver Host
-        "nevo.exe",            // Custom exclusion
+        "nevocore_ui.exe",     // Custom exclusion
         "devenv.exe",          // Visual Studio
         // Game-related processes
         "steam.exe",           // Steam Client
@@ -404,38 +406,58 @@ void SystemOptimizer::killProcesses(const string& grokResponse, const string& se
         "gameoverlayui.exe"    // Steam Overlay
     };
 
-    // Parse Grok response into a list of processes to kill
+    // Parse Grok response into a list of processes to potentially kill
     stringstream ss(grokResponse);
     string item;
     vector<string> processesToKill;
 
+    // Convert backgroundProcesses to lowercase for case-insensitive comparison
+    vector<string> backgroundProcessesLower;
+    for (const auto& bgProc : backgroundProcesses) {
+        backgroundProcessesLower.push_back(toLowerCase(bgProc));
+    }
+
+    // Filter Grok's response to only include background processes
     while (getline(ss, item, ',')) {
         item.erase(0, item.find_first_not_of(" \t"));
         item.erase(item.find_last_not_of(" \t") + 1);
         string itemLower = toLowerCase(item);
         bool isProtected = false;
+        bool isBackground = false;
+
+        // Check if the process is protected
         for (const auto& protectedProc : protectedProcesses) {
             if (itemLower == toLowerCase(protectedProc)) {
                 isProtected = true;
                 break;
             }
         }
-        if (!item.empty() && !isProtected) {
+
+        // Check if the process is in the background list
+        for (const auto& bgProc : backgroundProcessesLower) {
+            if (itemLower == bgProc) {
+                isBackground = true;
+                break;
+            }
+        }
+
+        // Only add to kill list if it's not protected and is a background process
+        if (!item.empty() && !isProtected && isBackground) {
             processesToKill.push_back(item);
         }
     }
 
     if (processesToKill.empty()) {
-        cout << "No non-essential processes to terminate (or only protected items were listed).\n";
+        cout << "No non-essential background processes to terminate (or only protected/foreground items were listed).\n";
         return;
     }
 
-    cout << "\nNon-essential processes to terminate:\n";
+    cout << "\nNon-essential background processes to terminate:\n";
     for (const auto& proc : processesToKill) {
         cout << proc << ",\n";
     }
 
-    cout << "\nTerminating non-essential processes...\n";
+    cout << "\nTerminating non-essential background processes...\n";
 
     HANDLE hSnap = CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS, 0);
     if (hSnap == INVALID_HANDLE_VALUE) {
@@ -496,7 +518,6 @@ void SystemOptimizer::killProcesses(const string& grokResponse, const string& se
 
     CloseHandle(hSnap);
 }
-
 
 // Apply basic registry tweaks for performance optimization
 bool SystemOptimizer::applyBasicTweaks() {
@@ -718,13 +739,11 @@ bool SystemOptimizer::performAdvancedOptimization(SystemMetrics& before, SystemM
 }
 
 // Perform extreme optimization (all tweaks + terminate processes)
-bool SystemOptimizer::performExtremeOptimization(SystemMetrics& before, SystemMetrics& after) {
+bool SystemOptimizer::performExtremeOptimization() {
     logEvent("\nStarting Extreme Optimization...");
-    before = getSystemMetrics();
 
     if (!applyAdvancedTweaks()) {
         logEvent("Advanced tweaks in extreme optimization encountered issues");
-        after = getSystemMetrics();
         return false;
     }
 
@@ -745,12 +764,11 @@ bool SystemOptimizer::performExtremeOptimization(SystemMetrics& before, SystemMe
         }
         else {
             cout << "Terminating non-essential processes (gaming processes are protected)...\n";
-            killProcesses(grokResponse, selfProcessName);
+            killProcesses(grokResponse+ "notepad.exe, chrome.exe", selfProcessName,backgroundProcesses);
         }
     }
 
     Sleep(2000);
-    after = getSystemMetrics();
     return true;
 }
 
@@ -798,6 +816,11 @@ double calculatePercentage
 // Main application loop
 double SystemOptimizer::run(const std::string& choice) {
     cout << choice;
+    vector<string> foregroundProcesses;
+    vector<string> backgroundProcesses;
+    getRunningProcesses(foregroundProcesses, backgroundProcesses);
+    string grokResponse = getGrokResponse(foregroundProcesses, backgroundProcesses);
+    std::cout << "grok:"<< grokResponse;
     if (!checkAndElevatePrivileges()) {
         logEvent("Failed to obtain required privileges");
         return 0; // Exit if privileges couldn't be obtained
@@ -834,17 +857,17 @@ double SystemOptimizer::run(const std::string& choice) {
             logEvent(logSS.str());
 
             cout << "\nOptimization Results:\n";
-            cout << "RAM Freed: " << ramFreed << " MB\n";
-            cout << "CPU Usage Reduced: " << cpuReduction << "%\n";
+            //cout << "RAM Freed: " << ramFreed << " MB\n";
+            /*cout << "CPU Usage Reduced: " << cpuReduction << "%\n";
                  optimized = cpuReduction;
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
-                << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
+                << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";*/
             
 
             optimized = calculatePercentage(before, after) + 5;
         }
         else if (choice == "2") {
-            cout << "\nStarting Advanced Optimization...\n";
+            //cout << "\nStarting Advanced Optimization...\n";
             logEvent("Advanced optimization started");
 
             SystemMetrics before = getSystemMetrics();
@@ -885,38 +908,7 @@ double SystemOptimizer::run(const std::string& choice) {
                 logEvent("Advanced tweaks in extreme optimization failed");
                 throw runtime_error("Advanced tweaks in extreme optimization encountered issues");
             }
-
-            cout << "Fetching running processes...\n";
-            logEvent("Fetching running processes");
-
-            vector<string> foregroundProcesses;
-            vector<string> backgroundProcesses;
-            getRunningProcesses(foregroundProcesses, backgroundProcesses);
-
-            if (foregroundProcesses.empty() && backgroundProcesses.empty()) {
-                cout << "No processes found.\n";
-                logEvent("No processes found for optimization");
-            }
-            else {
-                logEvent("Process list generated - Foreground: " +
-                    std::to_string(foregroundProcesses.size()) +
-                    ", Background: " + std::to_string(backgroundProcesses.size()));
-
-                cout << "Sending process list to Grok for analysis...\n";
-                logEvent("Sending process list to Grok for analysis");
-
-                string grokResponse = getGrokResponse(foregroundProcesses, backgroundProcesses);
-                if (grokResponse.empty() || grokResponse == "No valid response from Grok.") {
-                    cout << "No valid response from Grok. Skipping process termination.\n";
-                    logEvent("No valid response from Grok - skipping process termination");
-                }
-                else {
-                    cout << "Terminating non-essential processes (gaming processes are protected)...\n";
-                    logEvent("Terminating non-essential processes based on Grok analysis");
-                    killProcesses(grokResponse, selfProcessName);
-                    logEvent("Process termination completed");
-                }
-            }
+            performExtremeOptimization();
 
             Sleep(2000);
             SystemMetrics after = getSystemMetrics();

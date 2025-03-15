@@ -50,7 +50,6 @@ private:
     bool elevatePrivileges();
     void getRunningProcesses(std::vector<std::string>& foregroundProcesses, std::vector<std::string>& backgroundProcesses);
     std::string getGrokResponse(const std::vector<std::string>& foregroundProcesses, const std::vector<std::string>& backgroundProcesses);
-    void killProcesses(const std::string& grokResponse, const std::string& selfProcessName);
     bool applyBasicTweaks();
     bool applyAdvancedTweaks();
     bool restoreDefaultSettings();
@@ -65,11 +64,12 @@ public:
         const std::string& grokApiKey = "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");
     ~SystemOptimizer();
     double getCurrentLoadPercentage();
+    void killProcesses(const std::string& grokResponse, const std::string& selfProcessName, const std::vector<std::string>& backgroundProcesses);
     void initializeDemoLogs();
     bool checkAndElevatePrivileges();
     bool performBasicOptimization(SystemMetrics& before, SystemMetrics& after);
     bool performAdvancedOptimization(SystemMetrics& before, SystemMetrics& after);
-    bool performExtremeOptimization(SystemMetrics& before, SystemMetrics& after);
+    bool performExtremeOptimization();
     bool performSystemRestore(SystemMetrics& before, SystemMetrics& after);
     double run(const std::string& choice);
     std::vector<std::string> getLogs();
