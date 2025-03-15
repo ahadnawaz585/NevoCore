@@ -1,0 +1,930 @@
+#include "SystemOptimizer.h"
+#define B0I8aklq 1024;
+#define Rk6tx76d curl;
+#define FxfQROD7 networkPercentageOfWhole
+#define Xw3wnvRE (!checkAndElevatePrivileges())
+#define pAQ3rE1e "Running with Administrator privileges.\n";
+#define ZaPmXCkp 1024.0;
+#define dKlMwfp1 wstr)
+#define XBU4kaAP "CPU Usage: " << currentMetrics.cpuUsage << "\n";
+#define uWvr7ewQ pData->pid
+#define CkEyV0W1 "Sending process list to Grok for analysis...\n";
+#define sYGgyYPq logEvent("Optimizing network buffer sizes");
+#define C2xt1IdT adminGroup,
+#define gW7FIDXq logEvent("Acquiring system privileges");
+#define Ox7OV0TR (after.cpuUsage
+#define bphXaWdY transform(result.begin(),
+#define Xpe1KNns 1))
+#define xpIQdmen user.LowPart
+#define x8hPS7eq SECURITY_NT_AUTHORITY;
+#define Sti7FBP9 logEvent("Initializing performance monitors");
+#define JuGnG5fa curl_slist_append(headers,
+#define hXQklAYJ selfProcessName(processName),
+#define CPtYLrHm NULL)
+#define B5kwIyNj 0.0;
+#define Pj1LwZ3a 100
+#define mjHVTe53 restoreDefaultSettings();
+#define RoYOrJPH (error
+#define xmNPDr6D logEvent("Advanced optimization failed");
+#define nZb3N9Mt "Failed to open " << target << " (PID: " << pe32.th32ProcessID << "): Error " << error << "\n";
+#define EnbJtYg4 "Terminating non-essential processes (gaming processes are protected)...\n";
+#define x3wOrwJj string
+#define ioXb1ipy logEvent("Analyzing disk usage patterns");
+#define F8IVVjhs (total
+#define LmcsZWmt contentStart
+#define GoSXffVY idle,
+#define VrXo9aJk "Error: " << e.what() << "\n";
+#define GXsy0SLc SystemOptimizer::SystemOptimizer(const
+#define xYwheHKP *
+#define ohVJhm8a "VisualFXSetting");
+#define Mprune2U LONG
+#define gSY4ukXU "Failed to create Serialize key: Error " << result << "\n";
+#define LunKVyjY before,
+#define ZGBkTvRu "Failed to restore background apps: Error " << result << "\n";
+#define GQP2wqH4 killProcesses(grokResponse,
+#define mFK2APfq (networkChange
+#define lpDEx48y logEvent("Cleaning temporary files");
+#define Z6ATKoUX SystemOptimizer::isRunningAsAdmin()
+#define dOPCRZqk "StartupDelayInMSec", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+#define I3cveJB9 after.cpuUsage;
+#define dFbaiXeh "discord.exe",
+#define nmDA7oQ9 backgroundProcesses;
+#define BEaVFYNC (GlobalMemoryStatusEx(&memInfo))
+#define CPUZNXxk response.substr(contentStart,
+#define Oo0RxgKw [](unsigned
+#define GqtdG6ks pe32.dwSize
+#define uFDCNY0I "Grok API call failed: " << curl_easy_strerror(res) << endl;
+#define KEBSbAEN hSnap
+#define YFVvxVYO (after.ramAvailable
+#define CM8NF7jc "\nStarting Restore Operation...\n";
+#define tBXc2X7c logEvent("Background apps re-enabled.");
+#define Kq4ywM4J curl_slist*
+#define xMGDUCR7 item,
+#define iuGTNfhg ULONGLONG
+#define PlS6KyyB (hProcess
+#define iIUmmkwx runtime_error("Advanced tweaks in extreme optimization encountered issues");
+#define jG9Fng2h idleTime.dwLowDateTime;
+#define BAmFmZst "Failed to open BackgroundAccessApplications key: Error " << result << "\n";
+#define gmn58ovh else
+#define b2Qsg9ai pe32.th32ProcessID);
+#define uut5CRPH cpuContribution
+#define mY7WXRbd optimized
+#define aoKZ3tW8 foregroundProcesses;
+#define qFvFJk0b (GetIfTable(ifTable,
+#define vqtmSsZ3 applyBasicTweaks();
+#define urkrTVyC (before.cpuUsage
+#define os8L2MLe networkChange
+#define ETlh25vm nullptr;
+#define Qua5Fjm3 "RAM Available: " << currentMetrics.ramAvailable << " / " << totalRam << "\n";
+#define eLncy1Xm "taskmgr.exe",
+#define mL9nSAON userp->append((char*)contents,
+#define fABkNiXO idle.QuadPart;
+#define MPYZBoVY >=
+#define oCgLRVAB free(ifTable);
+#define dE1D4ebF foregroundProcesses,
+#define CgOeXMLE SystemOptimizer::WriteCallback(void*
+#define o9LtQS8X logEvent("Setting up resource trackers");
+#define D1QgtOPf idleTime.dwHighDateTime;
+#define mkwMRRcU (choice
+#define shEHK9GW (GetIfTable(NULL,
+#define lcCYlSHC void
+#define A0UcQZdT after);
+#define BNJt7PjI logEvent("Basic optimization started");
+#define iy4Dqdu2 c)
+#define GU4XlDSn fgProcessListStr.size()
+#define Y8QDtfPn (hSnap
+#define OH1U7Wma "\nOptimization Results:\n";
+#define Dar7tSqt SystemOptimizer::checkAndElevatePrivileges()
+#define ek3QPxU6 backgroundProcesses);
+#define AqMtdm9n ERROR_INSUFFICIENT_BUFFER)
+#define C8DDRVSp response.find("\"", contentStart);
+#define shWXydOZ networkContribution
+#define Htli2ikZ "Failed to retrieve memory statistics: Error " << GetLastError() << "\n";
+#define ayrxAiox logEvent("Error occurred: " + std::string(e.what()));
+#define G3HvIkEY char
+#define hmKTVA9N (data.hwnd)
+#define gk17RYwI "Final Load: " << (cpuContribution + ramContribution + networkContribution) << "\n";
+#define A7lqDkON currentProcW
+#define apXcBnj0 authHeader.c_str());
+#define l31H8svI "Failed to set GlobalUserDisabled: Error " << regResult << "\n";
+#define TbV34goA (isForeground)
+#define ZMOcjQ2c (SystemMetrics&
+#define btK8Kl7y response;
+#define iHhN4B3N logEvent("Loading optimization modules");
+#define AUJ6Ga4w NULL
+#define ff8ggwVU EnumWindowsData
+#define Iu4FgMtV fgProcessListStr
+#define QC0o8stW 100.0;
+#define hbZNMHLy const
+#define IekKchjE "Content-Type: application/json");
+#define K6JNYQlP logEvent("Analyzing memory usage patterns");
+#define iPONRGJd (!bgProcessListStr.empty())
+#define mhtD05vs ", ";
+#define o3KQwxpj curl_easy_perform(curl);
+#define IHv6sN1t logEvent("Restored Balanced power plan.");
+#define uGQJhi7f SystemOptimizer::performAdvancedOptimization(SystemMetrics&
+#define gdyIAKUC sei.nShow
+#define fee3ZZkr using
+#define x2odX4Jo logEvent("Basic optimization failed");
+#define TCQPqG9v (!fgProcessListStr.empty())
+#define HKOkK2RD after)
+#define rmZvHT9D logEvent("Discovered 4 startup items slowing boot time");
+#define dfmiTeup proc
+#define LbVlaBvB sei.hwnd
+#define DneVARNH sizeof(sei)
+#define ujcbfj2a memInfo.ullAvailPhys
+#define jojIfAIk logEvent("Basic Optimization...");
+#define q9yjtdhY logEvent("Failed to obtain required privileges");
+#define f5nYGgHc foregroundProcesses.push_back(procName);
+#define JTpVyKUC i++)
+#define C8L4I01s (itemLower
+#define QZbvs3gl authHeader
+#define S0AUrlTy adminGroup;
+#define VpejRB16 logEvent("Scanning for redundant files");
+#define yix5NgUh "csrss.exe",
+#define FNFOdA2r now
+#define xZHU1RjU bgProcessListStr.substr(0,
+#define ayu3yq7a logEvent("All optimizations applied successfully");
+#define LgEhIVFl currentMetrics
+#define HQUlCQfN cpuChange
+#define nXvktqse std::cout
+#define ADVeT76M logEvent("Adjusting virtual memory configuration");
+#define LaYFINZ6 after.networkBytes;
+#define jAkvkyUH string*
+#define mHfiWec2 (!applyBasicTweaks())
+#define tDM8OCqp std::string(timestamp)
+#define c2N7aJ3i "VisualFXSetting", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+#define S3gh9w4v "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\VisualEffects",
+#define hdcZ89w0 selfProcessName,
+#define DWH2siJP logEvent("Checking for fragmented files");
+#define soYcTPkK "battlenet.exe",
+#define Vhs7ZBQF ss(grokResponse);
+#define AmQn3ULI >
+#define FF0Fda6g "steamservice.exe",
+#define eU9HYXH0 "CPU Usage Change: " << (after.cpuUsage > before.cpuUsage ? "+" : "-")
+#define j6Q66xnv "gameoverlayui.exe"
+#define f02kaGPV networkPercentageOfWhole)
+#define ATmL9ELe namespace
+#define ZJbgFQRw "model": "llama-3.3-70b-versatile", "temperature": 1, "max_completion_tokens": 1024, "top_p": 1, "stream": false, "stop": null})";
+#define GK93gp6Q DWORD
+#define NShcykty e)
+#define g2ccqV3Y "Failed to retrieve network statistics: Error " << GetLastError() << "\n";
+#define VgNUx12R calculatePercentage(before,
+#define bldTHPio toLowerCase(target))
+#define L6Ouaoj1 std::vector<std::string>
+#define bc8jbCAr &pid);
+#define wiEm1JuI MAX_PATH))
+#define WuKFQcxa "Extreme optimization completed - RAM freed: " << ramFreed
+#define UAWXtUDw str(size
+#define OQ0EntKZ "Failed to reset StartupDelayInMSec: Error " << result << "\n";
+#define v5k1x62P (getline(ss,
+#define KdIkuMoL logEvent("Advanced tweaks in extreme optimization failed");
+#define loULOe14 CURLOPT_WRITEDATA,
+#define qCCvHAKy (1.0
+#define iOgorRsU "dwm.exe",
+#define vYPoXmru for
+#define EAf1PPmh break;
+#define QHZeZcyc logEvent("Comparing before/after metrics");
+#define jogtkJ6H currentPID)
+#define pEgim5BN "Failed to restore Balanced power plan: Error " << result << "\n";
+#define qpxX5vfC jsonData.c_str());
+#define yxqh3P8B item.find_first_not_of(" \t"));
+#define cfIjpv27 szPath[MAX_PATH];
+#define WQHrrUma catch
+#define qqYTLuN0 "No valid response from Grok. Skipping process termination.\n";
+#define gSwE26Oj cpuPercentageOfWhole
+#define xEK8DHRw ERROR_SUCCESS
+#define ttIeogOi userTime.dwHighDateTime;
+#define C6agH2JF logEvent("Examining scheduled tasks");
+#define Bv7qEh2r FALSE,
+#define uWjTOm0F (currentMetrics.ramAvailable
+#define JTNyLms1 " MB\n";
+#define Rmeu8jyi R"({"messages": [{"role": "user", "content": "Here's a list of foreground processes: )" + fgProcessListStr +
+#define r981DhvD logEvent("Identified 17 optimization opportunities");
+#define WgMLu4JE ERROR_SUCCESS)
+#define LriaoGxT <
+#define Z9agd3Ul "Failed to set VisualFXSetting: Error " << result << "\n";
+#define kCSWctIL "Successfully terminated " << target << " (PID: " << pe32.th32ProcessID << ")\n";
+#define R727LKLP hKey;
+#define XfAoeOYd FALSE)
+#define Hv1W9sG3 regResult
+#define Wptx2P8P SystemOptimizer::applyBasicTweaks()
+#define W9oTC8eR contentStart);
+#define cJ22IXnt fgProcessListStr;
+#define r1D0irVk (regResult
+#define WcD8Epfm time_t
+#define JfL5nrPQ runtime_error&
+#define Ll555AQE SystemOptimizer::wstringToString(const
+#define U1GGGVND "Reduced startup delay.\n";
+#define NpCvG5Ia "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
+#define Tmjm6HVd currentMetrics.cpuUsage
+#define wgWrtuHe ->
+#define YaUc9sXa processesToKill)
+#define fGWByyM9 user.QuadPart;
+#define iinv6FJh memInfo.dwLength
+#define kVUXeZtx runtime_error("Basic optimization encountered issues");
+#define VBkGoWxX cpuReduction;
+#define vHsvpm3A -1,
+#define jS45aZms logEvent("Process termination completed");
+#define P0cPXmvg false;
+#define xIjyx2c5 "devenv.exe",
+#define QNpognwO "This application requires administrative privileges to optimize system settings.\n";
+#define UgreMWgI maxNetworkBytes
+#define ZvSJoscF SystemOptimizer::restoreDefaultSettings()
+#define GT3I9Kvw abs(after.cpuUsage
+#define qDcaKHWM (MIB_IFTABLE*)malloc(size);
+#define yXXhqOPG WCHAR*
+#define JLGVtqAo "Access denied to terminate " << target << " (PID: " << pe32.th32ProcessID << ")\n";
+#define tH2T6LhX GetCurrentProcessId();
+#define pYYaQ03e pe32.th32ProcessID,
+#define tmuIbw0R SystemOptimizer::getLogs()
+#define bLNe3S0J do
+#define mj0Cb57r currentProc
+#define B09iysZQ &adminGroup))
+#define wEWTnteR logEvent("Checking system configuration");
+#define GmD4tUHS result;
+#define oxr3R26Z (LPARAM)&data);
+#define vbqYktZw 0.2;
+#define FQodOauQ metrics;
+#define RSEZQJxo auto&
+#define XMGbHij4 (double)idleTotal
+#define Q9W6M9cW backgroundProcesses.push_back(procName);
+#define d0Awakwa "Created Serialize key and reduced startup delay.\n";
+#define MJSjHynN logEvent("Process list generated - Foreground: " +
+#define v9n6Pahg (processesToKill.empty())
+#define mbg4qMPT logEvent("Running performance benchmark");
+#define wv7IOKoU logEvent("Detected 3 performance bottlenecks");
+#define SlsRGwYe total);
+#define LhpeybNe logEvent("Checking startup programs");
+#define X68tmuKS 0;
+#define BJU9C27J &response);
+#define tLrhB1A8 cpuReduction
+#define oxqNsxWm };
+#define RWIm7aUE "origin.exe",
+#define V2uR8B8T "\nNon-essential processes to terminate:\n";
+#define R1JkcirV (GetModuleFileNameW(NULL,
+#define BW2h8Lfr logEvent("Optimizing startup sequence");
+#define Xh2gSFCv 1;
+#define g2R7tucw logEvent("Starting memory optimization");
+#define uSWNY4QK "Failed to open BackgroundAccessApplications key: Error " << regResult << "\n";
+#define Mk4YwMOS curl_global_cleanup();
+#define WKggL4o8 std::string
+#define jqFROb2P +=
+#define v52oPfap nullptr);
+#define LxNJWY4a std::to_string(foregroundProcesses.size())
+#define vwCKrTF4 INVALID_HANDLE_VALUE)
+#define vIe9Vk7u CURLOPT_WRITEFUNCTION,
+#define NOOcIT7i kernelTime.dwLowDateTime;
+#define cVMeo8sS headers
+#define L4lQvSuK wstring(pe32.szExeFile);
+#define BjvjCjFU CloseHandle(hProcess);
+#define hGOIo7ob logSS;
+#define TYlPfS37 logEvent("Generating optimization report");
+#define D5CEkrJ7 wstringToString(pe32.szExeFile);
+#define gn5cp4Nx success;
+#define eKKHLQmA "No valid response from Grok.") {
+#define J4quEqXs bool
+#define aSbUuGUA runtime_error("Failed to fully restore default settings");
+#define bLDtKZCs apiKey(grokApiKey)
+#define UIFfMQke Sleep(2000);
+#define XctKc3PK logEvent("Analyzing scan results");
+#define l78iThbA (AllocateAndInitializeSid(&ntAuthority,
+#define ysDTiawS optimized;
+#define diW6X8Bm "Failed to set power plan to High Performance: Error " << result << "\n";
+#define Inj1smTa ramPercentageOfWhole
+#define jVGuoFce memInfo.ullTotalPhys;
+#define j8xDVLWi CloseHandle(hSnap);
+#define Vu7oBtbR "svchost.exe",
+#define R5w3KURx CURLOPT_POSTFIELDS,
+#define DIBZI7xm message;
+#define EoOrPclK NULL;
+#define mEsuIlOP "lsass.exe",
+#define KNThQCa5 "\nRestoring default settings...\n";
+#define aLctRHO7 curl_slist_free_all(headers);
+#define RmNFGkYf (Process32Next(hSnap,
+#define LbhN5UHn logEvent("Optimization complete");
+#define gthmKrGZ maxNetworkBytes)
+#define xQBg1PyY RegDeleteValueA(hKey,
+#define jTXI51u6 std::stringstream
+#define cpmqkTYn <<
+#define vm7dWEkG 0.4;
+#define jVKS166e logEvent("Optimizing DNS settings");
+#define ltNOdHFV "Exiting the program...\n";
+#define P6Ernigl (!restoreDefaultSettings())
+#define V6UA9SPp continue;
+#define ZIqkeVXZ isAdmin
+#define bpGtkQoJ struct
+#define UTGhXjjR selfProcessName);
+#define Oimh1tq7 cpuPercentChange
+#define Nw110vD6 SystemMetrics
+#define q21g2QSI MEMORYSTATUSEX
+#define a2f03I5u SystemOptimizer::performSystemRestore(SystemMetrics&
+#define hCTjDoP7 logEvent("Starting comprehensive system scan");
+#define e9YLUklR &pe32))
+#define DIQWoNyk ramFreed
+#define iLMlQSGh ifTable->dwNumEntries;
+#define ExgwUapt SystemOptimizer::getGrokResponse(const
+#define o16WhmZq std;
+#define PeXIwFdN networkContribution)
+#define qHpoCSA3 DOMAIN_ALIAS_RID_ADMINS,
+#define wFNp4HGV 0.0);
+#define gPn6dW7q long>(after.ramAvailable
+#define o53Yl0Sj response.find("\"content\":\"") + 11;
+#define UnNHOvS9 double
+#define LmJSi7gC std::round((cpuContribution
+#define hMGPAPyo itemLower
+#define w8PZdZd1 SECURITY_BUILTIN_DOMAIN_RID,
+#define KSC4iIHv FALSE;
+#define u1ny5p6C logEvent("Set power plan to High Performance.");
+#define EfTScRva KEY_SET_VALUE,
+#define opGxSLsI logEvent(logSS.str());
+#define cRWGPCHB CURLcode
+#define WxcRFwv5 metrics.ramAvailable
+#define QbDjHYCx REG_OPTION_NON_VOLATILE,
+#define knYIXYks pid;
+#define A5cr2M0E "Failed to reset VisualFXSetting: Error " << result << "\n";
+#define O88vwMZa &hKey,
+#define UxHywjOG "fontdrvhost.exe",
+#define bxWi0aS5 &kernelTime,
+#define UjbQAKrM "Disabled background apps.\n";
+#define CJZYo1HS idle.LowPart
+#define gxcIPyRd true;
+#define kyJJnQip size_t
+#define vH7Ud9Ok SystemOptimizer::getRunningProcesses(vector<string>&
+#define Rvd0otCM PSID
+#define TRulYnlV "Failed to set StartupDelayInMSec after creating key: Error " << result << "\n";
+#define IdIdLawI before.cpuUsage
+#define TS4iDylQ L"runas";
+#define OygBkVIG !=
+#define CAuoS5Te strftime(timestamp,
+#define LofLD489 3.0
+#define OphdaRBo logEvent("Starting Advanced Optimization...");
+#define cXxxjtoQ cerr
+#define i16DNiUr isProtected
+#define Z3GtAm4j ',')) {
+#define eIs7tVOm inline
+#define JIURiB5L localtime_s(&timeinfo,
+#define E826ldtO logEvent("Disk space recovered: 1.2 GB");
+#define OUV5IVB1 SystemOptimizer::initializeDemoLogs()
+#define gfMnjw4y ||
+#define OlGEQlQj MAX_LOGS)
+#define kI6mtFVG fgProcessListStr.substr(0,
+#define JhCNlPnU totalCpu
+#define DsDYglTO SID_IDENTIFIER_AUTHORITY
+#define Nbbc4kfC "Failed to retrieve CPU statistics: Error " << GetLastError() << "\n";
+#define Dcd9HD65 "GlobalUserDisabled", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+#define T0fIPIRK (result
+#define HtFqfhOX ifTable->table[i].dwInOctets
+#define Gp4nccsM success
+#define HsQ7NA8o "Attempting to request elevated permissions...\n";
+#define L4IHEkAq CURLE_OK)
+#define CDAIwaBs logEvent("Analyzing service configurations");
+#define Q4D1hks6 curl_easy_cleanup(curl);
+#define vSmyub2o res;
+#define x1YrEfHJ vector<string>&
+#define FHrTLqd7 (foregroundProcesses.empty()
+#define j0Jbs04V ifTable
+#define OhJ3d41j memInfo;
+#define tInQgYDJ "nevo.exe",
+#define J1KfDbiF url.c_str());
+#define UnIvD95p "%\n";
+#define e0olREUf SystemOptimizer::performBasicOptimization(SystemMetrics&
+#define gtqo81du message)
+#define Ji1B9GBT getRunningProcesses(foregroundProcesses,
+#define wfrryxh1 WriteCallback);
+#define G5ryj24P "winlogon.exe",
+#define f7ueuuJM logEvent("Optimizing memory allocation");
+#define ELXD2XiZ string::npos
+#define YEbd3Bef bgProcessListStr;
+#define dvypKrh9 procName
+#define QRlOUkA3 selfProcessName)
+#define ZngKqO7y currentPID
+#define e130YPUO "\nStarting Basic Optimization...\n";
+#define joRhcIkV (const
+#define e4Qiuqfg size
+#define Zf9101V6 tm
+#define MxpoJCZ4 " KB\n";
+#define Yu59dW33 (totalRam
+#define RRGL44CQ logSS
+#define pQtJnj61 value
+#define jB3QhbL8 logEvent("Adjusting service priorities");
+#define Fb3sGvDB bgProcessListStr
+#define C8oKF1O5 &&
+#define DeC9ftRl grokApiKey)
+#define eGmtuUdr system("powercfg /setactive 8c5e7fda-e8bf-4a96-9a85-a6e23a8c635c");
+#define lx4mWtTh (cpuChange
+#define NRqkdDAD "1") {
+#define CTjdQi3b getGrokResponse(foregroundProcesses,
+#define BCu9Uyrx backgroundProcesses)
+#define dJXf8s9o (logs.size()
+#define bujX3C8X 100)
+#define vT1iknR1 0)
+#define Vmg9vVcL (totalCpu
+#define hCEJkghi ntAuthority
+#define JA5lMq77 currentProcLower
+#define xSgt1DCD &size,
+#define ms3RxBbE i
+#define CsQXLPqr static_cast<double>(after.networkBytes
+#define t0vEVNKS "\nTerminating non-essential processes...\n";
+#define EKiQwuEb item;
+#define iAMkJUbU return;
+#define vxjqTGEu =
+#define qaUIUOrC logEvent("Beginning network optimization");
+#define xpNRCmZh &now);
+#define NQltdjDD logEvent("Setting optimal packet priorities");
+#define Rw1iFt6S "Software\\Microsoft\\Windows\\CurrentVersion\\Explorer\\Serialize",
+#define fU31EH9A (!elevatePrivileges())
+#define hR2ULSRE after.ramAvailable
+#define u2rOdCwc 1,
+#define wrN2p8pJ CURLOPT_URL,
+#define aVrxlEto "Software\\Microsoft\\Windows\\CurrentVersion\\BackgroundAccessApplications",
+#define jZoM3ZtE applyAdvancedTweaks();
+#define iSZUesJ6 after.ramAvailable;
+#define ERJQNXtH "epicgameslauncher.exe",
+#define shbjokcC "Failed to get first process: Error " << GetLastError() << "\n";
+#define qEg1t1gB 2);
+#define Q0h4JHG7 ramPercentChange
+#define s8j9FqAD logEvent("Applying Advanced Tweaks...");
+#define hfjI6QkO "gog.exe",
+#define D6iQRerD userTime.dwLowDateTime;
+#define b9vf9F0i after.cpuUsage
+#define enkvZlWp realsize);
+#define sAJsOFWa (CheckTokenMembership(NULL,
+#define AhF2wvaE SystemOptimizer::killProcesses(const
+#define Zk2j0CkK return
+#define LUifI9h7 ERROR_ACCESS_DENIED)
+#define FkHBk7ly logEvent("Sending process list to Grok for analysis");
+#define BwILiiNK grokResponse
+#define pNX86XLi (EnumWindowsData*)lParam;
+#define iehYODbL });
+#define s5eW4lY4 (grokResponse.empty()
+#define Fdmg4hFA 0.0
+#define RsvifhYp (!Process32First(hSnap,
+#define VyUCBICa :
+#define yxnTP9rw {
+#define gtY8mIQO "RAM Freed: " << ramFreed << " MB\n";
+#define akT56TLC result.begin(),
+#define s4eohCDN long
+#define ZZcA4kcr pData->hwnd
+#define gmXx9MbC 100.0
+#define KNJaBMnk GetWindowThreadProcessId(hwnd,
+#define RqsAN4v6 logEvent("Scanning system registry");
+#define kxnCff5x &hKey);
+#define UAjDi0KZ logEvent("Adjusting TCP/IP parameters");
+#define ebxUGlNf tolower(c);
+#define Zw0H3bka foregroundProcesses)
+#define H7pFRhmE (!item.empty()
+#define hBLcYMow OpenProcess(PROCESS_QUERY_INFORMATION,
+#define UHLTWVp1 "Visual effects restored to default.\n";
+#define FX1NgYGp sizeof(MEMORYSTATUSEX);
+#define LPJoW4YF calculatePercentage
+#define R7Scl5PW before.cpuUsage)
+#define oQC0NHXm logEvent("Program exit requested");
+#define Z09tgPhE &str[0],
+#define KakHqWTi (currentMetrics.networkBytes
+#define brlPFuCZ SystemOptimizer::performExtremeOptimization(SystemMetrics&
+#define A0gvliia totalRam)
+#define sDXsQkpK time(0);
+#define npSy2h31 logEvent("Analyzing network configuration");
+#define kQMF2oVJ " MB, CPU reduction: " << cpuReduction << "%";
+#define Ptj4XSuw /
+#define ODSVPDv0 metrics
+#define AeiWj72v (contentStart
+#define qedKyGot "Failed to open Serialize key: Error " << result << "\n";
+#define nhI9L5As sizeof(timestamp),
+#define s98QVkw3 before.networkBytes
+#define LZCwrU1o logEvent("Memory usage reduced by 340 MB");
+#define AmGYgO7r hwnd;
+#define XJUyL1bF "No non-essential processes to terminate (or only protected items were listed).\n";
+#define N6igVvI1 kernel.QuadPart
+#define oWcbinfP logs.push_back(logEntry);
+#define wLwdvPPF total
+#define Pcl6KdRS std::string&
+#define qVL8FfOO getSystemMetrics();
+#define vkJJE3Il bgProcessListStr.size()
+#define kOYRUadY runtime_error("Advanced optimization encountered issues");
+#define dejvqkVb timeinfo;
+#define GYq2YIW5 toLowerCase(protectedProc))
+#define XDlFfbyY logEvent("Applying system tweaks");
+#define o9AqjpEG (currentProcLower
+#define ZQOI1bLq processesToKill;
+#define EpRdEYTF idle.HighPart
+#define La9Euayd (ramChange
+#define Ey1dnxbJ system("powercfg /setactive 381b4222-f694-41f0-9685-ff5bb260df2e");
+#define SySsFxVv "Failed to set StartupDelayInMSec: Error " << result << "\n";
+#define MjmkCBlt isForeground
+#define NVtkCLrT logEvent("Invalid choice selected: " + choice);
+#define Led2TaS6 wstring
+#define lTPDBGww SystemOptimizer::getSystemMetrics()
+#define SBemgZ3R toLowerCase(currentProc);
+#define q0Oej9uH "2") {
+#define PZNctJAd curl_easy_init();
+#define byWKLfwP vector<string>
+#define PJp87YxP networkPercentChange
+#define pF2LY7P2 before.ramAvailable))
+#define Zcy1qSRg logs.erase(logs.begin());
+#define HjHJ4O45 logEvent("No processes found for optimization");
+#define LF6WMVim curl_global_init(CURL_GLOBAL_ALL);
+#define FMpDxLKg sei.lpVerb
+#define iwU4XOFf "smss.exe",
+#define mSovQuEE logEvent("Updating system configuration");
+#define KF9Uosm4 "explorer.exe",
+#define ci5IMykr NULL);
+#define I9ViLiIt logEvent("Saving configuration changes");
+#define Jwnsxarq IsWindowVisible(hwnd))
+#define k88B8wpM (TerminateProcess(hProcess,
+#define eOIgkKQg "Startup delay settings restored.\n";
+#define ScofFJpC data
+#define YGOHttVo kernel.LowPart
+#define mKE7Ybv0 error
+#define o39YST5m (totalNetwork
+#define lSZ0CiLn PROCESSENTRY32
+#define F0GA8wWq "\nStarting Extreme Optimization...\n";
+#define bys23Kl7 (before.networkBytes
+#define RVfKDbvr RegSetValueExA(hKey,
+#define lE28d3Gi logEvent("Removing unnecessary startup items");
+#define as12KvJw logEvent("System performance improved by 27%");
+#define Q4Jsq0xj url
+#define OMFlFJtb -
+#define KZ9Q1Oml FILETIME
+#define OmvbJFDT GetLastError();
+#define lan1DRKT "Basic optimization completed - RAM freed: " << ramFreed
+#define gxJSMWB0 if
+#define kt13VAPW logEvent("Terminating non-essential processes based on Grok analysis");
+#define yr4nHF4G "Fetching running processes...\n";
+#define cr4qN6ZQ logEntry
+#define BC2wPvAr toLowerCase(item);
+#define GJMrayoj +
+#define W4jACSi7 protectedProcesses)
+#define EvHxwQwo contentEnd
+#define NfLWIUDu std::round((ramPercentageOfWhole
+#define An2IdqYM "4") {
+#define j4TTgKEx ULARGE_INTEGER
+#define gr1QLW5o LPARAM
+#define gV1TLsVl hProcess
+#define bjwUip5f logEvent("Removing browser cache");
+#define FHagZkXb "No processes found.\n";
+#define a2k6ABvG "Operation completed with errors. Some changes may have been applied.\n";
+#define dcyGnEJS ",\n";
+#define CE1hKWvh R"(. Here's a list of background processes: )" + bgProcessListStr +
+#define XgsIc4v7 string&
+#define UdJiMFIm "Network Bytes: " << currentMetrics.networkBytes << " / " << maxNetworkBytes << "\n";
+#define DorOjer3 logEvent("Scanning boot sector");
+#define TtsAOZVp realsize
+#define li9qp2gp userTime;
+#define BoxqDtDA pe32{};
+#define V2s4iRDt 2,
+#define u8E0Mnwd lParam)
+#define GJbcFIUl WCHAR
+#define sA525JdE while
+#define lhGknbyT (before.ramAvailable
+#define rScoETC5 ?
+#define hKgkM5EE logEvent("Found 215 MB of temporary files");
+#define lxyQeVHc SystemOptimizer::logEvent(const
+#define Kak8fCG2 CreateToolhelp32Snapshot(TH32CS_SNAPPROCESS,
+#define OI7Z0Y81 NULL,
+#define kvSRhKUD after
+#define tA1XmPFs logEvent("System restore operation started");
+#define W7YrPcir kernel,
+#define k3raWdZL "https://api.groq.com/openai/v1/chat/completions";
+#define T58Q5E1G pData
+#define p568bjvs totalRam
+#define kDy45d0J "Skipping termination of self process (PID: " << currentPID << ")\n";
+#define r2C9k9R3 logs;
+#define S3QlomdX logEvent("Verifying optimizations");
+#define Vsowhuak realsize;
+#define ySljlQUp contents,
+#define rfPq17Fp totalNetwork)
+#define YM5n4X5B logEvent("Beginning system optimization");
+#define NQObr1CL WideCharToMultiByte(CP_UTF8,
+#define f6h1HvrY nullptr,
+#define yXRRjYB1 szPath,
+#define Da4DSJhW 0);
+#define qSVg8Igt CURL*
+#define thpoL6WU before.ramAvailable)
+#define J0cfNBYC SystemOptimizer::~SystemOptimizer()
+#define HIXNXIyh ramContribution
+#define Vp9nsU07 (after.networkBytes
+#define S7DXNuy3 logEvent("\nStarting Extreme Optimization...");
+#define xGdTCKoY timestamp[80];
+#define wFrDMyBk logEvent("Fetching running processes");
+#define y3Vb3eBL before.networkBytes)
+#define cY0QJtM9 "\nRestore Results:\n";
+#define evq97H4O headers);
+#define Vop66BoG curl_easy_setopt(curl,
+#define Ux68A9Ef user;
+#define A8C4ZH7l nmemb,
+#define AOsqWZZu protectedProcesses
+#define kS6rDLcW response
+#define UViDWV0I "CPU Usage Reduced: " << cpuReduction << "%\n";
+#define GnJg4s79 sei
+#define okucBJCw logEvent("No valid response from Grok - skipping process termination");
+#define ieI2DgbX sei.lpFile
+#define q3eTb8DB SW_NORMAL;
+#define dkGmUDyj backgroundProcesses.empty())
+#define ddbPCgpo target
+#define FlONd3SN SystemOptimizer::toLowerCase(const
+#define xkQx3XW2 choice)
+#define DoUBYBi4 1e9;
+#define faOq8hNZ logEvent("Detected 2 resource-intensive background processes");
+#define sg7MNPSp result
+#define WWTg4Ddl logEvent("Inspecting driver configurations");
+#define WhoAfIcg int
+#define QdI3mTW6 nmemb;
+#define KakBQN57 !isProtected)
+#define f6UBolN3 kernelTime,
+#define LMMGfXF6 totalNetwork
+#define niapZ08c string::npos)
+#define dwdagq5b NO_ERROR)
+#define yEB4abEG try
+#define qKYRP8pn metrics.networkBytes
+#define gdEWGYwP "Invalid choice. Returning to menu.\n";
+#define poLGsunD kernelTime.dwHighDateTime;
+#define DGho0GQu (DWORD
+#define uSsG4Grh "steamwebhelper.exe",
+#define BxpHF8Nl "uplay.exe",
+#define pIA79en6 EnumWindowsData*
+#define yMiTlBbg logEvent("Advanced optimization started");
+#define BAIjtHQi (ShellExecuteExW(&sei))
+#define lDmV77EG ", Background: " + std::to_string(backgroundProcesses.size()));
+#define s3oLjBrD (!isRunningAsAdmin())
+#define W2h7B65d curl
+#define VMBLaSA6 SystemMetrics&
+#define qSfS6egQ "StartupDelayInMSec");
+#define oIj70Cor "[%Y-%m-%d %H:%M:%S] ", &timeinfo);
+#define B4ZqL6i2 size,
+#define tQpqHP9T before.cpuUsage);
+#define UMHiFVj3 idleTotal
+#define Bv1nSdRe str;
+#define o6wXSXy0 "0") {
+#define FTMvv9Wt item.erase(0,
+#define yxuhh88I logEvent("Advanced tweaks in extreme optimization encountered issues");
+#define mxLstW4V protectedProc
+#define H7fskMRw FreeSid(adminGroup);
+#define HXph7enF RegCloseKey(hKey);
+#define SYbuFsex "Authorization: Bearer " + apiKey;
+#define vgBi0qC2 "steam.exe",
+#define yqTqH8Sp before
+#define RMs9jr1N sizeof(PROCESSENTRY32);
+#define cCPtrFPx grokResponse,
+#define sOmaLTB0 cout
+#define e56MpYio getTotalRam();
+#define v85dDMER stringstream
+#define L0keHVFA ifTable->table[i].dwOutOctets;
+#define PCjqyXG1 },
+#define mQ1crMbX metrics.cpuUsage
+#define Q7NjKD8X logEvent("Optimizing system registry");
+#define TQluo0eC TRUE;
+#define qI3qNulf result.end(),
+#define nVrEUOUv SystemOptimizer::getCurrentLoadPercentage()
+#define tybafaPc OpenProcess(PROCESS_TERMINATE,
+#define eP8gosLi (GetSystemTimes(&idleTime,
+#define yq8Yfce9 ramChange
+#define neZ8e2sX SystemOptimizer::elevatePrivileges()
+#define k8EdGGaG long>(after.networkBytes
+#define rQgloXoP user.HighPart
+#define kYJr8UOu HANDLE
+#define M0c32F9N 2;
+#define S2f1VOVF "RAM Available Change: " << (after.ramAvailable > before.ramAvailable ? "+" : "-")
+#define rUqgget6 logEvent("Defragmenting critical system files");
+#define o19eyyVc getTotalRam()
+#define ch08CrZ6 unsigned
+#define KBpt5Apw MIB_IFTABLE*
+#define ZlhqmjA4 szPath;
+#define jmslG2qP (!applyAdvancedTweaks())
+#define tIrLPWp3 }
+#define NNgkJlAv 0,
+#define jBwssHmv "Failed to run with Administrator privileges. Please run the program as an administrator manually.\n";
+#define AoPptkIF logEvent("Compacting system database");
+#define j1WQEH4s (pe32.th32ProcessID
+#define ZTnp9EL5 userp)
+#define FEq3kjWH &pe32));
+#define kVmCZUNF idleTime,
+#define BUEldrRV logEvent("System restore operation failed");
+#define TV0Csdf9 (pid
+#define VeB5oBIf logEvent("Boot time reduced by 5.3 seconds");
+#define obWx0l6f (curl)
+#define n2ACH3RI RegOpenKeyExA(HKEY_CURRENT_USER,
+#define KkTh8hwW processesToKill.push_back(item);
+#define TCPLU9FG logEvent("Releasing unused memory blocks");
+#define rBmSyiQx R"(. Return ONLY a comma-separated list of process names that are NOT necessary for Windows operation and NOT related to gaming in any way. Exclude processes essential for Windows stability, FPS, input/output latency, or network performance. Do NOT include any processes related to games, game launchers (e.g., steam.exe, epicgameslauncher.exe), gaming platforms (e.g., discord.exe), or graphics drivers (e.g., nvcontainer.exe). Examples of processes to exclude include chrome.exe, msedge.exe, but NOT steam.exe, epicgameslauncher.exe, discord.exe, or any game executable. Do not include extra text, explanations, or warnings."}],
+#define eJXH1enY before.networkBytes))
+#define pd3v7D99 "Failed to create process snapshot: Error " << GetLastError() << "\n";
+#define Gl0V7lN3 logEvent("Extreme optimization started");
+#define rsy7r19S ==
+#define xoXyTaKd SystemOptimizer::applyAdvancedTweaks()
+#define WZKQxY1Y logEvent("Optimization completed successfully");
+#define Qs1IHBAP "Failed to terminate " << target << " (PID: " << pe32.th32ProcessID << "): Error " << error << "\n";
+#define isBtjCCm "\nStarting Advanced Optimization...\n";
+#define y4L6NGSg abs(static_cast<long
+#define vCOTT73V 1024.0
+#define etCgt8w4 EnumWindows([](HWND
+#define NmOxDUsA exit(0);
+#define YR7L8jJe res
+#define EJlQKO79 logEvent("System startup initiated");
+#define iir6cViF jsonData
+#define ZAnb4pdM SystemOptimizer::run(const
+#define S8VlGfmg &userTime))
+#define AyKoCClG &isAdmin))
+#define vhbMG2hl logEvent("Adjusted visual effects for performance.");
+#define pi7GoWQC "nvcontainer.exe",
+#define hvPmwGXw logEvent("Fetching running processes...");
+#define hBlOWnhm "3") {
+#define LqnMPSIQ item.erase(item.find_last_not_of(" \t") + 1);
+#define GY7cbMaB "";
+#define raojqYFI BOOL
+#define rGUmesM3 throw
+#define eOapbm3K kernel.HighPart
+#define AFRuSM9N (hProcess)
+#define Q5rJi7Ib CURLOPT_HTTPHEADER,
+#define hycNaXmC SHELLEXECUTEINFOW
+#define Lj2jKOop str)
+#define aHanJVP8 HKEY
+#define O0RFahOH processName,
+#define KxVNjEeu before.ramAvailable
+#define i3bGL63i RegCreateKeyExA(HKEY_CURRENT_USER,
+#define iglVHhOx choice;
+#define IVeoXYPj logEvent("Applying Basic Registry Tweaks...");
+#define lnaEkpYC logEvent("Identifying memory leaks");
+#define JcZ43LGn logEvent("Located 8 fragmented system files");
+#define QO3t8b8G "Advanced optimization completed - RAM freed: " << ramFreed
+#define mlZfE44l hwnd,
+#define K1lFljqo wstr,
+#define Ls90Ockx totalCpu)
+#define ypggIWCq "Failed to open VisualEffects key: Error " << result << "\n";
+#define RGIJDZY8 (res
+#define pJMapWJx ERROR_FILE_NOT_FOUND)
+#define HhcxpTFC "No valid response from Grok.";
+#define LytaVGRi "Failed to elevate privileges: Error " << GetLastError() << endl;
+fee3ZZkr ATmL9ELe o16WhmZq GXsy0SLc XgsIc4v7 O0RFahOH hbZNMHLy XgsIc4v7 DeC9ftRl VyUCBICa hXQklAYJ bLDtKZCs yxnTP9rw 
+tIrLPWp3 J0cfNBYC yxnTP9rw tIrLPWp3 kyJJnQip CgOeXMLE ySljlQUp kyJJnQip B4ZqL6i2 kyJJnQip A8C4ZH7l jAkvkyUH ZTnp9EL5 
+yxnTP9rw kyJJnQip TtsAOZVp vxjqTGEu e4Qiuqfg xYwheHKP QdI3mTW6 mL9nSAON enkvZlWp Zk2j0CkK Vsowhuak tIrLPWp3 x3wOrwJj 
+Ll555AQE yXXhqOPG dKlMwfp1 yxnTP9rw WhoAfIcg e4Qiuqfg vxjqTGEu NQObr1CL NNgkJlAv K1lFljqo vHsvpm3A f6h1HvrY NNgkJlAv 
+f6h1HvrY v52oPfap x3wOrwJj UAWXtUDw OMFlFJtb u2rOdCwc Da4DSJhW NQObr1CL NNgkJlAv K1lFljqo vHsvpm3A Z09tgPhE B4ZqL6i2 
+f6h1HvrY v52oPfap Zk2j0CkK Bv1nSdRe tIrLPWp3 x3wOrwJj FlONd3SN XgsIc4v7 Lj2jKOop yxnTP9rw x3wOrwJj sg7MNPSp vxjqTGEu 
+Bv1nSdRe bphXaWdY qI3qNulf akT56TLC Oo0RxgKw G3HvIkEY iy4Dqdu2 yxnTP9rw Zk2j0CkK ebxUGlNf iehYODbL Zk2j0CkK GmD4tUHS 
+tIrLPWp3 J4quEqXs Z6ATKoUX yxnTP9rw raojqYFI ZIqkeVXZ vxjqTGEu KSC4iIHv DsDYglTO hCEJkghi vxjqTGEu x8hPS7eq Rvd0otCM 
+S0AUrlTy gxJSMWB0 l78iThbA V2s4iRDt w8PZdZd1 qHpoCSA3 NNgkJlAv NNgkJlAv NNgkJlAv NNgkJlAv NNgkJlAv NNgkJlAv B09iysZQ 
+yxnTP9rw gxJSMWB0 sAJsOFWa C2xt1IdT AyKoCClG yxnTP9rw tIrLPWp3 H7fskMRw tIrLPWp3 Zk2j0CkK ZIqkeVXZ OygBkVIG KSC4iIHv 
+tIrLPWp3 J4quEqXs neZ8e2sX yxnTP9rw GJbcFIUl cfIjpv27 gxJSMWB0 R1JkcirV yXRRjYB1 wiEm1JuI yxnTP9rw hycNaXmC GnJg4s79 
+vxjqTGEu yxnTP9rw DneVARNH oxqNsxWm FMpDxLKg vxjqTGEu TS4iDylQ ieI2DgbX vxjqTGEu ZlhqmjA4 LbVlaBvB vxjqTGEu EoOrPclK 
+gdyIAKUC vxjqTGEu q3eTb8DB gxJSMWB0 BAIjtHQi yxnTP9rw NmOxDUsA tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn LytaVGRi 
+Zk2j0CkK P0cPXmvg tIrLPWp3 tIrLPWp3 Zk2j0CkK P0cPXmvg tIrLPWp3 eIs7tVOm ch08CrZ6 s4eohCDN s4eohCDN o19eyyVc yxnTP9rw 
+q21g2QSI OhJ3d41j iinv6FJh vxjqTGEu FX1NgYGp gxJSMWB0 BEaVFYNC yxnTP9rw Zk2j0CkK jVGuoFce tIrLPWp3 Zk2j0CkK X68tmuKS 
+tIrLPWp3 UnNHOvS9 nVrEUOUv yxnTP9rw Nw110vD6 LgEhIVFl vxjqTGEu qVL8FfOO UnNHOvS9 uut5CRPH vxjqTGEu Tmjm6HVd xYwheHKP 
+vm7dWEkG UnNHOvS9 p568bjvs vxjqTGEu e56MpYio UnNHOvS9 HIXNXIyh vxjqTGEu uWjTOm0F Ptj4XSuw A0gvliia xYwheHKP Pj1LwZ3a 
+xYwheHKP vm7dWEkG UnNHOvS9 UgreMWgI vxjqTGEu DoUBYBi4 UnNHOvS9 shWXydOZ vxjqTGEu KakHqWTi Ptj4XSuw gthmKrGZ xYwheHKP 
+Pj1LwZ3a xYwheHKP vbqYktZw nXvktqse cpmqkTYn XBU4kaAP nXvktqse cpmqkTYn Qua5Fjm3 nXvktqse cpmqkTYn UdJiMFIm nXvktqse 
+cpmqkTYn gk17RYwI UnNHOvS9 sg7MNPSp vxjqTGEu LmJSi7gC GJMrayoj HIXNXIyh GJMrayoj PeXIwFdN Ptj4XSuw LofLD489 xYwheHKP 
+bujX3C8X Ptj4XSuw QC0o8stW Zk2j0CkK GmD4tUHS tIrLPWp3 lcCYlSHC lxyQeVHc Pcl6KdRS gtqo81du yxnTP9rw WcD8Epfm FNFOdA2r 
+vxjqTGEu sDXsQkpK bpGtkQoJ Zf9101V6 dejvqkVb G3HvIkEY xGdTCKoY JIURiB5L xpNRCmZh CAuoS5Te nhI9L5As oIj70Cor WKggL4o8 
+cr4qN6ZQ vxjqTGEu tDM8OCqp GJMrayoj DIBZI7xm gxJSMWB0 dJXf8s9o MPYZBoVY OlGEQlQj yxnTP9rw Zcy1qSRg tIrLPWp3 oWcbinfP 
+tIrLPWp3 lcCYlSHC OUV5IVB1 yxnTP9rw EJlQKO79 wEWTnteR iHhN4B3N Sti7FBP9 o9LtQS8X gW7FIDXq hCTjDoP7 DorOjer3 RqsAN4v6 
+LhpeybNe CDAIwaBs C6agH2JF WWTg4Ddl DWH2siJP ioXb1ipy VpejRB16 XctKc3PK r981DhvD wv7IOKoU hKgkM5EE rmZvHT9D faOq8hNZ 
+JcZ43LGn YM5n4X5B BW2h8Lfr lE28d3Gi jB3QhbL8 rUqgget6 lpDEx48y bjwUip5f AoPptkIF Q7NjKD8X g2R7tucw K6JNYQlP lnaEkpYC 
+TCPLU9FG f7ueuuJM ADVeT76M qaUIUOrC npSy2h31 jVKS166e UAjDi0KZ sYGgyYPq NQltdjDD XDlFfbyY mSovQuEE S3QlomdX mbg4qMPT 
+QHZeZcyc TYlPfS37 I9ViLiIt LbhN5UHn as12KvJw E826ldtO VeB5oBIf LZCwrU1o ayu3yq7a tIrLPWp3 L6Ouaoj1 tmuIbw0R yxnTP9rw 
+Zk2j0CkK r2C9k9R3 tIrLPWp3 Nw110vD6 lTPDBGww yxnTP9rw Nw110vD6 ODSVPDv0 vxjqTGEu yxnTP9rw NNgkJlAv NNgkJlAv Fdmg4hFA 
+oxqNsxWm q21g2QSI OhJ3d41j iinv6FJh vxjqTGEu FX1NgYGp gxJSMWB0 BEaVFYNC yxnTP9rw WxcRFwv5 vxjqTGEu ujcbfj2a Ptj4XSuw 
+B0I8aklq tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn Htli2ikZ tIrLPWp3 KZ9Q1Oml kVmCZUNF f6UBolN3 li9qp2gp gxJSMWB0 
+eP8gosLi bxWi0aS5 S8VlGfmg yxnTP9rw j4TTgKEx GoSXffVY W7YrPcir Ux68A9Ef CJZYo1HS vxjqTGEu jG9Fng2h EpRdEYTF vxjqTGEu 
+D1QgtOPf YGOHttVo vxjqTGEu NOOcIT7i eOapbm3K vxjqTGEu poLGsunD xpIQdmen vxjqTGEu D6iQRerD rQgloXoP vxjqTGEu ttIeogOi 
+iuGTNfhg wLwdvPPF vxjqTGEu N6igVvI1 GJMrayoj fGWByyM9 iuGTNfhg UMHiFVj3 vxjqTGEu fABkNiXO gxJSMWB0 F8IVVjhs AmQn3ULI 
+vT1iknR1 yxnTP9rw mQ1crMbX vxjqTGEu gmXx9MbC xYwheHKP qCCvHAKy OMFlFJtb XMGbHij4 Ptj4XSuw SlsRGwYe tIrLPWp3 tIrLPWp3 
+gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn Nbbc4kfC tIrLPWp3 KBpt5Apw j0Jbs04V vxjqTGEu ETlh25vm GK93gp6Q e4Qiuqfg vxjqTGEu 
+X68tmuKS gxJSMWB0 shEHK9GW xSgt1DCD XfAoeOYd rsy7r19S AqMtdm9n yxnTP9rw j0Jbs04V vxjqTGEu qDcaKHWM gxJSMWB0 qFvFJk0b 
+xSgt1DCD XfAoeOYd rsy7r19S dwdagq5b yxnTP9rw vYPoXmru DGho0GQu ms3RxBbE vxjqTGEu X68tmuKS ms3RxBbE LriaoGxT iLMlQSGh 
+JTpVyKUC yxnTP9rw qKYRP8pn jqFROb2P HtFqfhOX GJMrayoj L0keHVFA tIrLPWp3 tIrLPWp3 oCgLRVAB tIrLPWp3 gmn58ovh yxnTP9rw 
+cXxxjtoQ cpmqkTYn g2ccqV3Y tIrLPWp3 Zk2j0CkK FQodOauQ tIrLPWp3 lcCYlSHC vH7Ud9Ok dE1D4ebF x1YrEfHJ BCu9Uyrx yxnTP9rw 
+kYJr8UOu KEBSbAEN vxjqTGEu Kak8fCG2 Da4DSJhW gxJSMWB0 Y8QDtfPn rsy7r19S vwCKrTF4 yxnTP9rw cXxxjtoQ cpmqkTYn pd3v7D99 
+iAMkJUbU tIrLPWp3 lSZ0CiLn BoxqDtDA GqtdG6ks vxjqTGEu RMs9jr1N gxJSMWB0 RsvifhYp e9YLUklR yxnTP9rw cXxxjtoQ cpmqkTYn 
+shbjokcC j8xDVLWi iAMkJUbU tIrLPWp3 bLNe3S0J yxnTP9rw x3wOrwJj dvypKrh9 vxjqTGEu D5CEkrJ7 kYJr8UOu gV1TLsVl vxjqTGEu 
+hBLcYMow Bv7qEh2r b2Qsg9ai J4quEqXs MjmkCBlt vxjqTGEu P0cPXmvg gxJSMWB0 AFRuSM9N yxnTP9rw ff8ggwVU ScofFJpC vxjqTGEu 
+yxnTP9rw pYYaQ03e AUJ6Ga4w oxqNsxWm etCgt8w4 mlZfE44l gr1QLW5o u8E0Mnwd wgWrtuHe raojqYFI yxnTP9rw pIA79en6 T58Q5E1G 
+vxjqTGEu pNX86XLi GK93gp6Q knYIXYks KNJaBMnk bc8jbCAr gxJSMWB0 TV0Csdf9 rsy7r19S uWvr7ewQ C8oKF1O5 Jwnsxarq yxnTP9rw 
+ZZcA4kcr vxjqTGEu AmGYgO7r Zk2j0CkK KSC4iIHv tIrLPWp3 Zk2j0CkK TQluo0eC PCjqyXG1 oxr3R26Z gxJSMWB0 hmKTVA9N yxnTP9rw 
+MjmkCBlt vxjqTGEu gxcIPyRd tIrLPWp3 BjvjCjFU tIrLPWp3 gxJSMWB0 TbV34goA yxnTP9rw f5nYGgHc tIrLPWp3 gmn58ovh yxnTP9rw 
+Q9W6M9cW tIrLPWp3 tIrLPWp3 sA525JdE RmNFGkYf FEq3kjWH j8xDVLWi tIrLPWp3 x3wOrwJj ExgwUapt x1YrEfHJ dE1D4ebF hbZNMHLy 
+x1YrEfHJ BCu9Uyrx yxnTP9rw qSVg8Igt Rk6tx76d cRWGPCHB vSmyub2o x3wOrwJj btK8Kl7y x3wOrwJj Q4Jsq0xj vxjqTGEu k3raWdZL 
+x3wOrwJj cJ22IXnt vYPoXmru joRhcIkV RSEZQJxo dfmiTeup VyUCBICa Zw0H3bka yxnTP9rw Iu4FgMtV jqFROb2P dfmiTeup GJMrayoj 
+mhtD05vs tIrLPWp3 gxJSMWB0 TCQPqG9v Iu4FgMtV vxjqTGEu kI6mtFVG GU4XlDSn OMFlFJtb qEg1t1gB x3wOrwJj YEbd3Bef vYPoXmru 
+joRhcIkV RSEZQJxo dfmiTeup VyUCBICa BCu9Uyrx yxnTP9rw Fb3sGvDB jqFROb2P dfmiTeup GJMrayoj mhtD05vs tIrLPWp3 gxJSMWB0 
+iPONRGJd Fb3sGvDB vxjqTGEu xZHU1RjU vkJJE3Il OMFlFJtb qEg1t1gB x3wOrwJj iir6cViF vxjqTGEu Rmeu8jyi CE1hKWvh rBmSyiQx 
+ZJbgFQRw LF6WMVim W2h7B65d vxjqTGEu PZNctJAd gxJSMWB0 obWx0l6f yxnTP9rw Vop66BoG wrN2p8pJ J1KfDbiF bpGtkQoJ Kq4ywM4J 
+cVMeo8sS vxjqTGEu EoOrPclK cVMeo8sS vxjqTGEu JuGnG5fa IekKchjE x3wOrwJj QZbvs3gl vxjqTGEu SYbuFsex cVMeo8sS vxjqTGEu 
+JuGnG5fa apXcBnj0 Vop66BoG Q5rJi7Ib evq97H4O Vop66BoG R5w3KURx qpxX5vfC Vop66BoG vIe9Vk7u wfrryxh1 Vop66BoG loULOe14 
+BJU9C27J YR7L8jJe vxjqTGEu o3KQwxpj gxJSMWB0 RGIJDZY8 OygBkVIG L4IHEkAq yxnTP9rw cXxxjtoQ cpmqkTYn uFDCNY0I kS6rDLcW 
+vxjqTGEu GY7cbMaB tIrLPWp3 gmn58ovh yxnTP9rw kyJJnQip LmcsZWmt vxjqTGEu o53Yl0Sj kyJJnQip EvHxwQwo vxjqTGEu C8DDRVSp 
+gxJSMWB0 AeiWj72v OygBkVIG ELXD2XiZ C8oKF1O5 EvHxwQwo OygBkVIG niapZ08c yxnTP9rw kS6rDLcW vxjqTGEu CPUZNXxk EvHxwQwo 
+OMFlFJtb W9oTC8eR tIrLPWp3 gmn58ovh yxnTP9rw kS6rDLcW vxjqTGEu HhcxpTFC tIrLPWp3 tIrLPWp3 Q4D1hks6 aLctRHO7 tIrLPWp3 
+Mk4YwMOS Zk2j0CkK btK8Kl7y tIrLPWp3 lcCYlSHC AhF2wvaE XgsIc4v7 cCPtrFPx hbZNMHLy XgsIc4v7 QRlOUkA3 yxnTP9rw GK93gp6Q 
+ZngKqO7y vxjqTGEu tH2T6LhX byWKLfwP AOsqWZZu vxjqTGEu yxnTP9rw hdcZ89w0 eLncy1Xm KF9Uosm4 Vu7oBtbR yix5NgUh iwU4XOFf 
+mEsuIlOP G5ryj24P iOgorRsU UxHywjOG tInQgYDJ xIjyx2c5 vgBi0qC2 FF0Fda6g uSsG4Grh ERJQNXtH soYcTPkK RWIm7aUE BxpHF8Nl 
+hfjI6QkO dFbaiXeh pi7GoWQC j6Q66xnv oxqNsxWm v85dDMER Vhs7ZBQF x3wOrwJj EKiQwuEb byWKLfwP ZQOI1bLq sA525JdE v5k1x62P 
+xMGDUCR7 Z3GtAm4j FTMvv9Wt yxqh3P8B LqnMPSIQ x3wOrwJj hMGPAPyo vxjqTGEu BC2wPvAr J4quEqXs i16DNiUr vxjqTGEu P0cPXmvg 
+vYPoXmru joRhcIkV RSEZQJxo mxLstW4V VyUCBICa W4jACSi7 yxnTP9rw gxJSMWB0 C8L4I01s rsy7r19S GYq2YIW5 yxnTP9rw i16DNiUr 
+vxjqTGEu gxcIPyRd EAf1PPmh tIrLPWp3 tIrLPWp3 gxJSMWB0 H7pFRhmE C8oKF1O5 KakBQN57 yxnTP9rw KkTh8hwW tIrLPWp3 tIrLPWp3 
+gxJSMWB0 v9n6Pahg yxnTP9rw sOmaLTB0 cpmqkTYn XJUyL1bF iAMkJUbU tIrLPWp3 sOmaLTB0 cpmqkTYn V2uR8B8T vYPoXmru joRhcIkV 
+RSEZQJxo dfmiTeup VyUCBICa YaUc9sXa yxnTP9rw sOmaLTB0 cpmqkTYn dfmiTeup cpmqkTYn dcyGnEJS tIrLPWp3 sOmaLTB0 cpmqkTYn 
+t0vEVNKS kYJr8UOu KEBSbAEN vxjqTGEu Kak8fCG2 Da4DSJhW gxJSMWB0 Y8QDtfPn rsy7r19S vwCKrTF4 yxnTP9rw cXxxjtoQ cpmqkTYn 
+pd3v7D99 iAMkJUbU tIrLPWp3 lSZ0CiLn BoxqDtDA GqtdG6ks vxjqTGEu RMs9jr1N gxJSMWB0 RsvifhYp e9YLUklR yxnTP9rw cXxxjtoQ 
+cpmqkTYn shbjokcC j8xDVLWi iAMkJUbU tIrLPWp3 bLNe3S0J yxnTP9rw gxJSMWB0 j1WQEH4s rsy7r19S jogtkJ6H yxnTP9rw sOmaLTB0 
+cpmqkTYn kDy45d0J V6UA9SPp tIrLPWp3 Led2TaS6 A7lqDkON vxjqTGEu L4lQvSuK x3wOrwJj mj0Cb57r vxjqTGEu D5CEkrJ7 x3wOrwJj 
+JA5lMq77 vxjqTGEu SBemgZ3R vYPoXmru joRhcIkV RSEZQJxo ddbPCgpo VyUCBICa YaUc9sXa yxnTP9rw gxJSMWB0 o9AqjpEG rsy7r19S 
+bldTHPio yxnTP9rw kYJr8UOu gV1TLsVl vxjqTGEu tybafaPc Bv7qEh2r b2Qsg9ai gxJSMWB0 PlS6KyyB rsy7r19S CPtYLrHm yxnTP9rw 
+GK93gp6Q mKE7Ybv0 vxjqTGEu OmvbJFDT gxJSMWB0 RoYOrJPH rsy7r19S LUifI9h7 yxnTP9rw cXxxjtoQ cpmqkTYn JLGVtqAo tIrLPWp3 
+gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn nZb3N9Mt tIrLPWp3 tIrLPWp3 gmn58ovh yxnTP9rw gxJSMWB0 k88B8wpM Xpe1KNns yxnTP9rw 
+sOmaLTB0 cpmqkTYn kCSWctIL tIrLPWp3 gmn58ovh yxnTP9rw GK93gp6Q mKE7Ybv0 vxjqTGEu OmvbJFDT gxJSMWB0 RoYOrJPH rsy7r19S 
+LUifI9h7 yxnTP9rw cXxxjtoQ cpmqkTYn JLGVtqAo tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn Qs1IHBAP tIrLPWp3 tIrLPWp3 
+BjvjCjFU tIrLPWp3 EAf1PPmh tIrLPWp3 tIrLPWp3 tIrLPWp3 sA525JdE RmNFGkYf FEq3kjWH j8xDVLWi tIrLPWp3 J4quEqXs Wptx2P8P 
+yxnTP9rw aHanJVP8 R727LKLP J4quEqXs Gp4nccsM vxjqTGEu gxcIPyRd IVeoXYPj Mprune2U sg7MNPSp vxjqTGEu n2ACH3RI S3gh9w4v 
+NNgkJlAv EfTScRva kxnCff5x gxJSMWB0 T0fIPIRK rsy7r19S WgMLu4JE yxnTP9rw GK93gp6Q pQtJnj61 vxjqTGEu M0c32F9N sg7MNPSp 
+vxjqTGEu RVfKDbvr c2N7aJ3i gxJSMWB0 T0fIPIRK OygBkVIG WgMLu4JE yxnTP9rw cXxxjtoQ cpmqkTYn Z9agd3Ul Gp4nccsM vxjqTGEu 
+P0cPXmvg tIrLPWp3 gmn58ovh yxnTP9rw vhbMG2hl tIrLPWp3 HXph7enF tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn ypggIWCq 
+Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 sg7MNPSp vxjqTGEu n2ACH3RI Rw1iFt6S NNgkJlAv EfTScRva kxnCff5x gxJSMWB0 T0fIPIRK 
+rsy7r19S WgMLu4JE yxnTP9rw GK93gp6Q pQtJnj61 vxjqTGEu X68tmuKS sg7MNPSp vxjqTGEu RVfKDbvr dOPCRZqk gxJSMWB0 T0fIPIRK 
+OygBkVIG WgMLu4JE yxnTP9rw cXxxjtoQ cpmqkTYn SySsFxVv Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 gmn58ovh yxnTP9rw sOmaLTB0 
+cpmqkTYn U1GGGVND tIrLPWp3 HXph7enF tIrLPWp3 gmn58ovh yxnTP9rw sg7MNPSp vxjqTGEu i3bGL63i Rw1iFt6S NNgkJlAv OI7Z0Y81 
+QbDjHYCx EfTScRva OI7Z0Y81 O88vwMZa ci5IMykr gxJSMWB0 T0fIPIRK rsy7r19S WgMLu4JE yxnTP9rw GK93gp6Q pQtJnj61 vxjqTGEu 
+X68tmuKS sg7MNPSp vxjqTGEu RVfKDbvr dOPCRZqk gxJSMWB0 T0fIPIRK OygBkVIG WgMLu4JE yxnTP9rw cXxxjtoQ cpmqkTYn TRulYnlV 
+Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 gmn58ovh yxnTP9rw sOmaLTB0 cpmqkTYn d0Awakwa tIrLPWp3 HXph7enF tIrLPWp3 gmn58ovh 
+yxnTP9rw cXxxjtoQ cpmqkTYn gSY4ukXU Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 tIrLPWp3 Zk2j0CkK gn5cp4Nx tIrLPWp3 J4quEqXs 
+xoXyTaKd yxnTP9rw J4quEqXs Gp4nccsM vxjqTGEu vqtmSsZ3 s8j9FqAD GK93gp6Q sg7MNPSp vxjqTGEu eGmtuUdr gxJSMWB0 T0fIPIRK 
+rsy7r19S vT1iknR1 yxnTP9rw u1ny5p6C tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn diW6X8Bm Gp4nccsM vxjqTGEu P0cPXmvg 
+tIrLPWp3 aHanJVP8 R727LKLP Mprune2U Hv1W9sG3 vxjqTGEu n2ACH3RI aVrxlEto NNgkJlAv EfTScRva kxnCff5x gxJSMWB0 r1D0irVk 
+rsy7r19S WgMLu4JE yxnTP9rw GK93gp6Q pQtJnj61 vxjqTGEu Xh2gSFCv Hv1W9sG3 vxjqTGEu RVfKDbvr Dcd9HD65 gxJSMWB0 r1D0irVk 
+rsy7r19S WgMLu4JE yxnTP9rw sOmaLTB0 cpmqkTYn UjbQAKrM tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn l31H8svI Gp4nccsM 
+vxjqTGEu P0cPXmvg tIrLPWp3 HXph7enF tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn uSWNY4QK Gp4nccsM vxjqTGEu P0cPXmvg 
+tIrLPWp3 Zk2j0CkK gn5cp4Nx tIrLPWp3 J4quEqXs ZvSJoscF yxnTP9rw J4quEqXs Gp4nccsM vxjqTGEu gxcIPyRd aHanJVP8 R727LKLP 
+sOmaLTB0 cpmqkTYn KNThQCa5 Mprune2U sg7MNPSp vxjqTGEu n2ACH3RI S3gh9w4v NNgkJlAv EfTScRva kxnCff5x gxJSMWB0 T0fIPIRK 
+rsy7r19S WgMLu4JE yxnTP9rw sg7MNPSp vxjqTGEu xQBg1PyY ohVJhm8a gxJSMWB0 T0fIPIRK OygBkVIG xEK8DHRw C8oKF1O5 sg7MNPSp 
+OygBkVIG pJMapWJx yxnTP9rw cXxxjtoQ cpmqkTYn A5cr2M0E Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 gmn58ovh yxnTP9rw sOmaLTB0 
+cpmqkTYn UHLTWVp1 tIrLPWp3 HXph7enF tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn ypggIWCq Gp4nccsM vxjqTGEu P0cPXmvg 
+tIrLPWp3 sg7MNPSp vxjqTGEu n2ACH3RI Rw1iFt6S NNgkJlAv EfTScRva kxnCff5x gxJSMWB0 T0fIPIRK rsy7r19S WgMLu4JE yxnTP9rw 
+sg7MNPSp vxjqTGEu xQBg1PyY qSfS6egQ gxJSMWB0 T0fIPIRK OygBkVIG xEK8DHRw C8oKF1O5 sg7MNPSp OygBkVIG pJMapWJx yxnTP9rw 
+cXxxjtoQ cpmqkTYn OQ0EntKZ Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 gmn58ovh yxnTP9rw sOmaLTB0 cpmqkTYn eOIgkKQg tIrLPWp3 
+HXph7enF tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn qedKyGot Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 sg7MNPSp vxjqTGEu 
+Ey1dnxbJ gxJSMWB0 T0fIPIRK rsy7r19S vT1iknR1 yxnTP9rw IHv6sN1t tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn pEgim5BN 
+Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 sg7MNPSp vxjqTGEu n2ACH3RI aVrxlEto NNgkJlAv EfTScRva kxnCff5x gxJSMWB0 T0fIPIRK 
+rsy7r19S WgMLu4JE yxnTP9rw GK93gp6Q pQtJnj61 vxjqTGEu X68tmuKS sg7MNPSp vxjqTGEu RVfKDbvr Dcd9HD65 gxJSMWB0 T0fIPIRK 
+rsy7r19S WgMLu4JE yxnTP9rw tBXc2X7c tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn ZGBkTvRu Gp4nccsM vxjqTGEu P0cPXmvg 
+tIrLPWp3 HXph7enF tIrLPWp3 gmn58ovh yxnTP9rw cXxxjtoQ cpmqkTYn BAmFmZst Gp4nccsM vxjqTGEu P0cPXmvg tIrLPWp3 Zk2j0CkK 
+gn5cp4Nx tIrLPWp3 J4quEqXs Dar7tSqt yxnTP9rw gxJSMWB0 s3oLjBrD yxnTP9rw sOmaLTB0 cpmqkTYn QNpognwO sOmaLTB0 cpmqkTYn 
+HsQ7NA8o gxJSMWB0 fU31EH9A yxnTP9rw cXxxjtoQ cpmqkTYn jBwssHmv Zk2j0CkK P0cPXmvg tIrLPWp3 Zk2j0CkK P0cPXmvg tIrLPWp3 
+sOmaLTB0 cpmqkTYn pAQ3rE1e Zk2j0CkK gxcIPyRd tIrLPWp3 J4quEqXs e0olREUf LunKVyjY VMBLaSA6 HKOkK2RD yxnTP9rw jojIfAIk 
+yqTqH8Sp vxjqTGEu qVL8FfOO J4quEqXs sg7MNPSp vxjqTGEu vqtmSsZ3 UIFfMQke kvSRhKUD vxjqTGEu qVL8FfOO Zk2j0CkK GmD4tUHS 
+tIrLPWp3 J4quEqXs uGQJhi7f LunKVyjY VMBLaSA6 HKOkK2RD yxnTP9rw OphdaRBo yqTqH8Sp vxjqTGEu qVL8FfOO J4quEqXs sg7MNPSp 
+vxjqTGEu jZoM3ZtE UIFfMQke kvSRhKUD vxjqTGEu qVL8FfOO Zk2j0CkK GmD4tUHS tIrLPWp3 J4quEqXs brlPFuCZ LunKVyjY VMBLaSA6 
+HKOkK2RD yxnTP9rw S7DXNuy3 yqTqH8Sp vxjqTGEu qVL8FfOO gxJSMWB0 jmslG2qP yxnTP9rw yxuhh88I kvSRhKUD vxjqTGEu qVL8FfOO 
+Zk2j0CkK P0cPXmvg tIrLPWp3 hvPmwGXw byWKLfwP aoKZ3tW8 byWKLfwP nmDA7oQ9 Ji1B9GBT ek3QPxU6 gxJSMWB0 FHrTLqd7 C8oKF1O5 
+dkGmUDyj yxnTP9rw sOmaLTB0 cpmqkTYn FHagZkXb tIrLPWp3 gmn58ovh yxnTP9rw sOmaLTB0 cpmqkTYn CkEyV0W1 x3wOrwJj BwILiiNK 
+vxjqTGEu CTjdQi3b ek3QPxU6 gxJSMWB0 s5eW4lY4 gfMnjw4y BwILiiNK rsy7r19S eKKHLQmA sOmaLTB0 cpmqkTYn qqYTLuN0 tIrLPWp3 
+gmn58ovh yxnTP9rw sOmaLTB0 cpmqkTYn EnbJtYg4 GQP2wqH4 UTGhXjjR tIrLPWp3 tIrLPWp3 UIFfMQke kvSRhKUD vxjqTGEu qVL8FfOO 
+Zk2j0CkK gxcIPyRd tIrLPWp3 J4quEqXs a2f03I5u LunKVyjY VMBLaSA6 HKOkK2RD yxnTP9rw sOmaLTB0 cpmqkTYn CM8NF7jc yqTqH8Sp 
+vxjqTGEu qVL8FfOO J4quEqXs sg7MNPSp vxjqTGEu mjHVTe53 UIFfMQke kvSRhKUD vxjqTGEu qVL8FfOO Zk2j0CkK GmD4tUHS tIrLPWp3 
+UnNHOvS9 LPJoW4YF ZMOcjQ2c LunKVyjY VMBLaSA6 HKOkK2RD yxnTP9rw UnNHOvS9 yq8Yfce9 vxjqTGEu y4L6NGSg gPn6dW7q OMFlFJtb 
+pF2LY7P2 Ptj4XSuw ZaPmXCkp UnNHOvS9 HQUlCQfN vxjqTGEu GT3I9Kvw OMFlFJtb tQpqHP9T UnNHOvS9 Q0h4JHG7 vxjqTGEu lhGknbyT 
+OygBkVIG vT1iknR1 rScoETC5 La9Euayd xYwheHKP vCOTT73V Ptj4XSuw thpoL6WU xYwheHKP gmXx9MbC VyUCBICa B5kwIyNj UnNHOvS9 
+Oimh1tq7 vxjqTGEu urkrTVyC OygBkVIG vT1iknR1 rScoETC5 lx4mWtTh Ptj4XSuw R7Scl5PW xYwheHKP gmXx9MbC VyUCBICa B5kwIyNj 
+UnNHOvS9 os8L2MLe vxjqTGEu CsQXLPqr OMFlFJtb y3Vb3eBL Ptj4XSuw ZaPmXCkp UnNHOvS9 PJp87YxP vxjqTGEu bys23Kl7 OygBkVIG 
+vT1iknR1 rScoETC5 mFK2APfq xYwheHKP vCOTT73V Ptj4XSuw y3Vb3eBL xYwheHKP gmXx9MbC VyUCBICa B5kwIyNj s4eohCDN s4eohCDN 
+p568bjvs vxjqTGEu KxVNjEeu GJMrayoj iSZUesJ6 UnNHOvS9 Inj1smTa vxjqTGEu Yu59dW33 OygBkVIG vT1iknR1 rScoETC5 YFVvxVYO 
+xYwheHKP gmXx9MbC Ptj4XSuw A0gvliia VyUCBICa B5kwIyNj UnNHOvS9 JhCNlPnU vxjqTGEu IdIdLawI GJMrayoj I3cveJB9 UnNHOvS9 
+gSwE26Oj vxjqTGEu Vmg9vVcL OygBkVIG vT1iknR1 rScoETC5 Ox7OV0TR xYwheHKP gmXx9MbC Ptj4XSuw Ls90Ockx VyUCBICa B5kwIyNj 
+s4eohCDN s4eohCDN LMMGfXF6 vxjqTGEu s98QVkw3 GJMrayoj LaYFINZ6 UnNHOvS9 FxfQROD7 vxjqTGEu o39YST5m OygBkVIG vT1iknR1 
+rScoETC5 Vp9nsU07 xYwheHKP gmXx9MbC Ptj4XSuw rfPq17Fp VyUCBICa B5kwIyNj UnNHOvS9 sg7MNPSp vxjqTGEu NfLWIUDu GJMrayoj 
+gSwE26Oj GJMrayoj f02kaGPV Ptj4XSuw LofLD489 xYwheHKP bujX3C8X Ptj4XSuw QC0o8stW Zk2j0CkK GmD4tUHS tIrLPWp3 UnNHOvS9 
+ZAnb4pdM Pcl6KdRS xkQx3XW2 yxnTP9rw sOmaLTB0 cpmqkTYn iglVHhOx gxJSMWB0 Xw3wnvRE yxnTP9rw q9yjtdhY Zk2j0CkK X68tmuKS 
+tIrLPWp3 yEB4abEG yxnTP9rw gxJSMWB0 mkwMRRcU rsy7r19S o6wXSXy0 sOmaLTB0 cpmqkTYn ltNOdHFV oQC0NHXm tIrLPWp3 gmn58ovh 
+gxJSMWB0 mkwMRRcU rsy7r19S NRqkdDAD sOmaLTB0 cpmqkTYn e130YPUO BNJt7PjI Nw110vD6 yqTqH8Sp vxjqTGEu qVL8FfOO gxJSMWB0 
+mHfiWec2 yxnTP9rw x2odX4Jo rGUmesM3 kVUXeZtx tIrLPWp3 UIFfMQke Nw110vD6 kvSRhKUD vxjqTGEu qVL8FfOO UnNHOvS9 DIQWoNyk 
+vxjqTGEu lhGknbyT LriaoGxT hR2ULSRE rScoETC5 YFVvxVYO OMFlFJtb thpoL6WU Ptj4XSuw vCOTT73V VyUCBICa wFNp4HGV UnNHOvS9 
+tLrhB1A8 vxjqTGEu urkrTVyC AmQn3ULI b9vf9F0i rScoETC5 IdIdLawI OMFlFJtb b9vf9F0i VyUCBICa wFNp4HGV jTXI51u6 hGOIo7ob 
+RRGL44CQ cpmqkTYn lan1DRKT cpmqkTYn kQMF2oVJ opGxSLsI sOmaLTB0 cpmqkTYn OH1U7Wma sOmaLTB0 cpmqkTYn gtY8mIQO sOmaLTB0 
+cpmqkTYn UViDWV0I mY7WXRbd vxjqTGEu VBkGoWxX sOmaLTB0 cpmqkTYn NpCvG5Ia cpmqkTYn y4L6NGSg k8EdGGaG OMFlFJtb eJXH1enY 
+Ptj4XSuw vCOTT73V cpmqkTYn MxpoJCZ4 mY7WXRbd vxjqTGEu VgNUx12R A0UcQZdT tIrLPWp3 gmn58ovh gxJSMWB0 mkwMRRcU rsy7r19S 
+q0Oej9uH sOmaLTB0 cpmqkTYn isBtjCCm yMiTlBbg Nw110vD6 yqTqH8Sp vxjqTGEu qVL8FfOO gxJSMWB0 jmslG2qP yxnTP9rw xmNPDr6D 
+rGUmesM3 kOYRUadY tIrLPWp3 UIFfMQke Nw110vD6 kvSRhKUD vxjqTGEu qVL8FfOO UnNHOvS9 DIQWoNyk vxjqTGEu lhGknbyT LriaoGxT 
+hR2ULSRE rScoETC5 YFVvxVYO OMFlFJtb thpoL6WU Ptj4XSuw vCOTT73V VyUCBICa wFNp4HGV UnNHOvS9 tLrhB1A8 vxjqTGEu urkrTVyC 
+AmQn3ULI b9vf9F0i rScoETC5 IdIdLawI OMFlFJtb b9vf9F0i VyUCBICa wFNp4HGV jTXI51u6 hGOIo7ob RRGL44CQ cpmqkTYn QO3t8b8G 
+cpmqkTYn kQMF2oVJ opGxSLsI sOmaLTB0 cpmqkTYn OH1U7Wma sOmaLTB0 cpmqkTYn gtY8mIQO sOmaLTB0 cpmqkTYn UViDWV0I mY7WXRbd 
+vxjqTGEu VBkGoWxX sOmaLTB0 cpmqkTYn NpCvG5Ia cpmqkTYn y4L6NGSg k8EdGGaG OMFlFJtb eJXH1enY Ptj4XSuw vCOTT73V cpmqkTYn 
+MxpoJCZ4 mY7WXRbd vxjqTGEu VgNUx12R A0UcQZdT tIrLPWp3 gmn58ovh gxJSMWB0 mkwMRRcU rsy7r19S hBlOWnhm sOmaLTB0 cpmqkTYn 
+F0GA8wWq Gl0V7lN3 Nw110vD6 yqTqH8Sp vxjqTGEu qVL8FfOO gxJSMWB0 jmslG2qP yxnTP9rw KdIkuMoL rGUmesM3 iIUmmkwx tIrLPWp3 
+sOmaLTB0 cpmqkTYn yr4nHF4G wFrDMyBk byWKLfwP aoKZ3tW8 byWKLfwP nmDA7oQ9 Ji1B9GBT ek3QPxU6 gxJSMWB0 FHrTLqd7 C8oKF1O5 
+dkGmUDyj yxnTP9rw sOmaLTB0 cpmqkTYn FHagZkXb HjHJ4O45 tIrLPWp3 gmn58ovh yxnTP9rw MJSjHynN LxNJWY4a GJMrayoj lDmV77EG 
+sOmaLTB0 cpmqkTYn CkEyV0W1 FkHBk7ly x3wOrwJj BwILiiNK vxjqTGEu CTjdQi3b ek3QPxU6 gxJSMWB0 s5eW4lY4 gfMnjw4y BwILiiNK 
+rsy7r19S eKKHLQmA sOmaLTB0 cpmqkTYn qqYTLuN0 okucBJCw tIrLPWp3 gmn58ovh yxnTP9rw sOmaLTB0 cpmqkTYn EnbJtYg4 kt13VAPW 
+GQP2wqH4 UTGhXjjR jS45aZms tIrLPWp3 tIrLPWp3 UIFfMQke Nw110vD6 kvSRhKUD vxjqTGEu qVL8FfOO UnNHOvS9 DIQWoNyk vxjqTGEu 
+lhGknbyT LriaoGxT hR2ULSRE rScoETC5 YFVvxVYO OMFlFJtb thpoL6WU Ptj4XSuw vCOTT73V VyUCBICa wFNp4HGV UnNHOvS9 tLrhB1A8 
+vxjqTGEu urkrTVyC AmQn3ULI b9vf9F0i rScoETC5 IdIdLawI OMFlFJtb b9vf9F0i VyUCBICa wFNp4HGV jTXI51u6 hGOIo7ob RRGL44CQ 
+cpmqkTYn WuKFQcxa cpmqkTYn kQMF2oVJ opGxSLsI sOmaLTB0 cpmqkTYn OH1U7Wma sOmaLTB0 cpmqkTYn gtY8mIQO sOmaLTB0 cpmqkTYn 
+UViDWV0I mY7WXRbd vxjqTGEu VBkGoWxX sOmaLTB0 cpmqkTYn NpCvG5Ia cpmqkTYn y4L6NGSg k8EdGGaG OMFlFJtb eJXH1enY Ptj4XSuw 
+vCOTT73V cpmqkTYn MxpoJCZ4 mY7WXRbd vxjqTGEu VgNUx12R A0UcQZdT tIrLPWp3 gmn58ovh gxJSMWB0 mkwMRRcU rsy7r19S An2IdqYM 
+sOmaLTB0 cpmqkTYn CM8NF7jc tA1XmPFs Nw110vD6 yqTqH8Sp vxjqTGEu qVL8FfOO gxJSMWB0 P6Ernigl yxnTP9rw BUEldrRV rGUmesM3 
+aSbUuGUA tIrLPWp3 UIFfMQke Nw110vD6 kvSRhKUD vxjqTGEu qVL8FfOO jTXI51u6 hGOIo7ob opGxSLsI sOmaLTB0 cpmqkTYn cY0QJtM9 
+sOmaLTB0 cpmqkTYn S2f1VOVF cpmqkTYn y4L6NGSg gPn6dW7q OMFlFJtb pF2LY7P2 Ptj4XSuw vCOTT73V cpmqkTYn JTNyLms1 sOmaLTB0 
+cpmqkTYn eU9HYXH0 cpmqkTYn GT3I9Kvw OMFlFJtb R7Scl5PW cpmqkTYn UnIvD95p sOmaLTB0 cpmqkTYn NpCvG5Ia cpmqkTYn y4L6NGSg 
+k8EdGGaG OMFlFJtb eJXH1enY Ptj4XSuw vCOTT73V cpmqkTYn MxpoJCZ4 mY7WXRbd vxjqTGEu VgNUx12R A0UcQZdT WZKQxY1Y tIrLPWp3 
+gmn58ovh yxnTP9rw sOmaLTB0 cpmqkTYn gdEWGYwP NVtkCLrT tIrLPWp3 Zk2j0CkK ysDTiawS tIrLPWp3 WQHrrUma joRhcIkV JfL5nrPQ 
+NShcykty yxnTP9rw cXxxjtoQ cpmqkTYn VrXo9aJk ayrxAiox sOmaLTB0 cpmqkTYn a2k6ABvG tIrLPWp3 tIrLPWp3
