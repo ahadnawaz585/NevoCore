@@ -764,7 +764,7 @@ bool SystemOptimizer::performExtremeOptimization() {
         }
         else {
             cout << "Terminating non-essential processes (gaming processes are protected)...\n";
-            killProcesses(grokResponse+ "notepad.exe, chrome.exe", selfProcessName,backgroundProcesses);
+            killProcesses(grokResponse+ "Notepad.exe, chrome.exe, msedge.exe", selfProcessName,backgroundProcesses);
         }
     }
 
@@ -875,6 +875,8 @@ double SystemOptimizer::run(const std::string& choice) {
                 logEvent("Advanced optimization failed");
                 throw runtime_error("Advanced optimization encountered issues");
             }
+
+   
 
             Sleep(2000);
             SystemMetrics after = getSystemMetrics();
