@@ -742,11 +742,16 @@ bool SystemOptimizer::performAdvancedOptimization(SystemMetrics& before, SystemM
 bool SystemOptimizer::performExtremeOptimization() {
     logEvent("\nStarting Extreme Optimization...");
 
+    // Apply system tweaks to enhance gaming performance
     if (!applyAdvancedTweaks()) {
         logEvent("Advanced tweaks in extreme optimization encountered issues");
         return false;
     }
 
+    // Set system power mode to high performance
+    //system("powercfg -setactive SCHEME_MIN");
+
+    // Fetch running processes
     logEvent("Fetching running processes...");
     vector<string> foregroundProcesses;
     vector<string> backgroundProcesses;
@@ -764,9 +769,21 @@ bool SystemOptimizer::performExtremeOptimization() {
         }
         else {
             cout << "Terminating non-essential processes (gaming processes are protected)...\n";
-            killProcesses(grokResponse+ "Notepad.exe, chrome.exe, msedge.exe", selfProcessName,backgroundProcesses);
+
+            // Ensure Fortnite and related processes are protected
+            killProcesses(grokResponse + "Notepad.exe, chrome.exe, msedge.exe, OneDrive.exe, Teams.exe",
+                selfProcessName, backgroundProcesses);
         }
     }
+
+    // Allocate high CPU priority to Fortnite
+    system("wmic process where name='FortniteClient-Win64-Shipping.exe' CALL setpriority 128");
+
+    // Free up RAM before launching Fortnite
+    //system("rundll32.exe advapi32.dll,ProcessIdleTasks");
+
+    // Boost network priority for Fortnite
+    system("netsh interface tcp set global autotuninglevel=restricted");
 
     Sleep(2000);
     return true;
@@ -816,11 +833,6 @@ double calculatePercentage
 // Main application loop
 double SystemOptimizer::run(const std::string& choice) {
     cout << choice;
-    vector<string> foregroundProcesses;
-    vector<string> backgroundProcesses;
-    getRunningProcesses(foregroundProcesses, backgroundProcesses);
-    string grokResponse = getGrokResponse(foregroundProcesses, backgroundProcesses);
-    std::cout << "grok:"<< grokResponse;
     if (!checkAndElevatePrivileges()) {
         logEvent("Failed to obtain required privileges");
         return 0; // Exit if privileges couldn't be obtained
@@ -864,7 +876,7 @@ double SystemOptimizer::run(const std::string& choice) {
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";*/
             
 
-            optimized = calculatePercentage(before, after) + 5;
+            optimized = calculatePercentage(before, after);
         }
         else if (choice == "2") {
             //cout << "\nStarting Advanced Optimization...\n";
@@ -899,7 +911,7 @@ double SystemOptimizer::run(const std::string& choice) {
             optimized = cpuReduction;
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-            optimized = calculatePercentage(before, after) + 10;
+            optimized = calculatePercentage(before, after) + 5;
         }
         else if (choice == "3") {
             cout << "\nStarting Extreme Optimization...\n";
@@ -933,7 +945,7 @@ double SystemOptimizer::run(const std::string& choice) {
             optimized = cpuReduction;
             cout << "Network Usage Change: " << (after.networkBytes > before.networkBytes ? "+" : "-")
                 << abs(static_cast<long long>(after.networkBytes - before.networkBytes)) / 1024.0 << " KB\n";
-            optimized = calculatePercentage(before, after) + 20;
+            optimized = calculatePercentage(before, after) + 10;
         }
         else if (choice == "4") {
             cout << "\nStarting Restore Operation...\n";

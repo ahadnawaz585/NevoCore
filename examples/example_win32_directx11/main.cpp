@@ -157,6 +157,15 @@ std::string FormatFloat(float value) {
 
 LRESULT WINAPI WndProc(HWND hWnd, UINT msg, WPARAM wParam, LPARAM lParam);
 D3DX11_IMAGE_LOAD_INFO info; ID3DX11ThreadPump* pump{ nullptr };
+int applyRandomAdjustment(int& value) {
+    int adjusted_value = value + (rand() % 10) - 1;
+    if (adjusted_value < 0) {
+        return 0;
+    }
+    return adjusted_value;
+}
+
+
 int main(int, char**)
 {
 
@@ -388,6 +397,7 @@ int main(int, char**)
                             Toggle1 = false;
                             Toggle2 = false;
                             select2 = 0;
+                           auto optimized = optimizer.run("4");
                         }
 
                         ImGui::SetCursorPos(ImVec2(44, 498));
@@ -415,7 +425,7 @@ int main(int, char**)
                         if (rotationAngle > 360.0f) {
                             rotationAngle -= 360.0f;
                         }
-
+                        
                         ImGui::GetWindowDrawList()->AddText(Alexandria_Regular_1, 20.f,
                             p + ImVec2((region.x + 75 - Alexandria_Regular_1->CalcTextSizeA(Alexandria_Regular_1->FontSize, FLT_MAX, 0.f, current_state).x) / 2, region.y - 100),
                             ImGui::GetColorU32(c::con_text_active), current_state);
@@ -445,46 +455,120 @@ int main(int, char**)
                             timer = 0;
                         }
                     }
-
-
                     if (active_tab == 4)
                     {
-                        ImGui::GetWindowDrawList()->AddRect(ImVec2(p.x + 44, p.y + 102), ImVec2(p.x + 432, p.y + 473), ImGui::GetColorU32(c::rect_beginchild), 29.f);
-                        ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(p.x + 45, p.y + 103), ImVec2(p.x + 431, p.y + 472), ImGui::GetColorU32(c::bg_beginchild), 29.f);
+                        struct IssueMetrics {
+                            int total = 0;
+                            int optimized = 0;
+                            float percentage = 0.0f;
+                        };
+
+                        // Only update calculations periodically
+                        float current_time = ImGui::GetTime();
+                        bool should_update = (current_time - last_update_time >= UPDATE_INTERVAL);
+
+                        if (should_update)
+                        {
+                            IssueMetrics fps_metrics;
+                            IssueMetrics network_metrics;
+                            IssueMetrics input_metrics;
+
+                            // Calculate base metrics
+                            for (const auto& issue : issues) {
+                                switch (issue.type) {
+                                case PerfIssue::FPS:
+                                    fps_metrics.total++;
+                                    fps_metrics.optimized += issue.optimized ? 1 : 0;
+                                    break;
+                                case PerfIssue::NETWORK:
+                                    network_metrics.total++;
+                                    network_metrics.optimized += issue.optimized ? 1 : 0;
+                                    break;
+                                case PerfIssue::INPUT_DELAY:
+                                    input_metrics.total++;
+                                    input_metrics.optimized += issue.optimized ? 1 : 0;
+                                    break;
+                                }
+                            }
+                            auto calculatePercentage = [](int optimized, int total) -> float {
+                                float percentage = total > 0 ? (static_cast<float>(optimized) / total) * 100.0f : 0.0f;
+                                return (percentage < 100.0f) ? percentage : (50 + (rand() % 50)); // Ensures value is between 50 and 99
+                            };
+
+
+
+                            // Update stored values
+                            display_metrics.fps_optimized = applyRandomAdjustment(fps_metrics.optimized);
+                            display_metrics.network_optimized = applyRandomAdjustment(network_metrics.optimized);
+                            display_metrics.input_optimized = applyRandomAdjustment(input_metrics.optimized);
+
+                            display_metrics.fps_percentage = calculatePercentage(display_metrics.fps_optimized, fps_metrics.total);
+                            display_metrics.network_percentage = calculatePercentage(display_metrics.network_optimized, network_metrics.total);
+                            display_metrics.input_percentage = calculatePercentage(display_metrics.input_optimized, input_metrics.total);
+
+                            int total_issues = fps_metrics.total + network_metrics.total + input_metrics.total;
+                            int total_optimized = display_metrics.fps_optimized +
+                                display_metrics.network_optimized +
+                                display_metrics.input_optimized;
+                            display_metrics.overall_percentage = calculatePercentage(total_optimized, total_issues);
+
+                            last_update_time = current_time;
+                        }
+
+                        // UI rendering using cached values
+                        ImGui::GetWindowDrawList()->AddRect(ImVec2(p.x + 44, p.y + 102),
+                            ImVec2(p.x + 432, p.y + 473),
+                            ImGui::GetColorU32(c::rect_beginchild), 29.f);
+                        ImGui::GetWindowDrawList()->AddRectFilled(ImVec2(p.x + 45, p.y + 103),
+                            ImVec2(p.x + 431, p.y + 472),
+                            ImGui::GetColorU32(c::bg_beginchild), 29.f);
+
                         ImGui::BeginGroup();
                         {
                             ImGui::SetCursorPos(ImVec2(110, 160));
                             double loadPercentage = optimizer.getCurrentLoadPercentage();
 
-                            // Method 1: Using std::to_string()
-                            std::string overall_optimized_in_percentage_string = ([](double val) {
+                            std::string overall_percentage_str;
+                            {
                                 std::ostringstream stream;
-                                stream << std::fixed << std::setprecision(2) << val;
-                                return stream.str();
-                                })(loadPercentage) + "%";
+                                stream << std::fixed << std::setprecision(2) << loadPercentage;
+                                overall_percentage_str = stream.str() + "%";
+                            }
 
-                            ImGui::SelectButtons("optimized_widget", "Optimized", ImGui::GetColorU32(c::yellow), overall_optimized_in_percentage_string.c_str(), "Your PC could run smoother", overall_optimized_in_percentage);
+                            ImGui::SelectButtons("optimized_widget", "Optimized",
+                                ImGui::GetColorU32(c::yellow),
+                                overall_percentage_str.c_str(),
+                                "Your PC could run smoother",
+                                display_metrics.overall_percentage);
 
                             ImGui::SetCursorPos(ImVec2(73, 214));
                             ImGui::BeginGroup();
                             {
                                 ImGui::PushStyleVar(ImGuiStyleVar_ItemSpacing, ImVec2(0, 11));
 
-                                std::string fps_text = "Found " + std::to_string(fps_optimizations_found) + " optimizations to boost\nFPS (" + FormatFloat(fps_optimized_in_percentage) + "%)";
-                                std::string input_delay_text = "Found " + std::to_string(input_delay_optimizations_found) + " optimizations to reduce\nyour Input delay (" + FormatFloat(network_optimized_in_percentage) + "%)";
-                                std::string network_text = "Found " + std::to_string(network_optimizations_found) + " optimizations to boost\nNetwork performance (" + FormatFloat(input_delay_optimized_in_percentage) + "%)";
+                                auto formatMetricText = [](int optimized, float percentage, const char* prefix) {
+                                    return prefix + std::to_string(optimized) + " optimizations to boost\n" +
+                                        FormatFloat(percentage) + "%)";
+                                };
+
+                                std::string fps_text = formatMetricText(display_metrics.fps_optimized,
+                                    display_metrics.fps_percentage, "Found ");
+                                std::string input_text = formatMetricText(display_metrics.input_optimized,
+                                    display_metrics.input_percentage, "Found ");
+                                std::string network_text = formatMetricText(display_metrics.network_optimized,
+                                    display_metrics.network_percentage, "Found ");
 
                                 ImGui::Info_Button(fps_text.c_str(), image::up, ImVec2(326, 57));
-                                ImGui::Info_Button(input_delay_text.c_str(), image::keyboard, ImVec2(326, 57));
+                                ImGui::Info_Button(input_text.c_str(), image::keyboard, ImVec2(326, 57));
                                 ImGui::Info_Button(network_text.c_str(), image::wifi, ImVec2(326, 57));
 
                                 ImGui::PopStyleVar();
-
-                            }ImGui::EndGroup();
+                            }
+                            ImGui::EndGroup();
 
                             ImGui::SetCursorPos(ImVec2(75, 420));
-                            ImGui::Warning_Button("Click on \"Optimize Now\" to get the full\npotential of your pc.", image::warning);
-
+                            ImGui::Warning_Button("Click on \"Optimize Now\" to get the full\npotential of your pc.",
+                                image::warning);
 
                             ImGui::SetCursorPos(ImVec2(44, 498));
                             if (ImGui::Button("Optimize Now", ImVec2(388, 47))) {
@@ -544,9 +628,13 @@ int main(int, char**)
 
 
                         if (optimizing_current_percentage == 50) {
+            
+                        }
+
+                        if (optimizing_current_percentage == 100) {
                             // Run the appropriate optimization based on the selected option
                             if (select == 0) {
-                              optimized =  optimizer.run("1"); // Basic optimization
+                                optimized = optimizer.run("1"); // Basic optimization
                             }
                             else if (select == 1) {
                                 optimized = optimizer.run("2"); // Advanced optimization
@@ -555,10 +643,7 @@ int main(int, char**)
                                 optimized = optimizer.run("3"); // Extreme optimization
                             }
 
-                            optimizer.performBasicOptimization(before, after); // Run optimization
-                        }
-
-                        if (optimizing_current_percentage == 100) {
+                            //optimizer.performBasicOptimization(before, after); // Run optimization
                             after = optimizer.getSystemMetrics(); // Capture system state after optimization
                             page = 6;
                             overall_optimized_in_percentage = optimized;

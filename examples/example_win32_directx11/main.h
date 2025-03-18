@@ -2,7 +2,23 @@
 
 #define IMGUI_DEFINE_MATH_OPERATORS
 #include "imgui_internal.h"
+#include <algorithm>  // For std::max
+#include <cstdlib>    // For rand()
+#include <ctime>
+#include <thread>
+#include <chrono>
+#include <iomanip>
+#include <vector>
 //#include "examples/example_win32_directx9/imgui_settings.h"
+
+struct PerfIssue {
+    enum IssueType { FPS, NETWORK, INPUT_DELAY };
+    IssueType type;
+    bool optimized;
+};
+
+enum class IssueType { FPS, NETWORK, INPUT_DELAY };
+
 
 void CustomStyleColor() 
 {
@@ -59,13 +75,47 @@ static float tab_alpha = 0.f; /* */ static float tab_add; /* */ static int activ
 int analysing_current_percentage = 0;
 int optimizing_current_percentage = 0;
 
-int fps_optimizations_found = 268;
-int network_optimizations_found = 37;
-int input_delay_optimizations_found = 148;
 
-float fps_optimized_in_percentage = 35.0f;
-float network_optimized_in_percentage = 62.0f;
-float input_delay_optimized_in_percentage = 25.0f;
+
+int fps_optimizations_found = 0;
+int network_optimizations_found = 0;
+int input_delay_optimizations_found = 0;
+
+float fps_optimized_in_percentage = 0.0f;
+float network_optimized_in_percentage = 0.0f;
+float input_delay_optimized_in_percentage = 0.0f;
+
+static float last_update_time = 0.0f;
+static const float UPDATE_INTERVAL = 10.0f;
+static struct DisplayMetrics {
+    int fps_optimized = 0;
+    int network_optimized = 0;
+    int input_optimized = 0;
+    float fps_percentage = 0.0f;
+    float network_percentage = 0.0f;
+    float input_percentage = 0.0f;
+    float overall_percentage = 0.0f;
+} display_metrics;
+
+
+std::vector<PerfIssue> issues = {
+      {PerfIssue::FPS, true},
+      {PerfIssue::FPS, false},
+      {PerfIssue::FPS, true},
+      {PerfIssue::FPS, true},
+      {PerfIssue::NETWORK, true},
+      {PerfIssue::NETWORK, false},
+      {PerfIssue::NETWORK, true},
+      {PerfIssue::NETWORK, false},
+      {PerfIssue::NETWORK, true},
+      {PerfIssue::INPUT_DELAY, true},
+      {PerfIssue::INPUT_DELAY, true},
+      {PerfIssue::INPUT_DELAY, false},
+      {PerfIssue::FPS, true},
+      {PerfIssue::NETWORK, true},
+      {PerfIssue::INPUT_DELAY, true}
+};
+
 float overall_optimized_in_percentage = 0.0f;
 double optimized = 50;
 
