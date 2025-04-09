@@ -28,6 +28,12 @@
     <ClInclude Include="Font.h" />
     <ClInclude Include="definitions.h" />
     <ClInclude Include="SystemOptimizer.h" />
+    <ClInclude Include="RegistryTweaks.h" />
+    <ClInclude Include="NetworkTweaks.h" />
+    <ClInclude Include="ProcessTweaks.h" />
+    <ClInclude Include="SystemTweaks.h" />
+    <ClInclude Include="GraphicsTweaks.h" />
+    <ClInclude Include="BiosTweaks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp">
@@ -53,6 +59,12 @@
     </ClCompile>
     <ClCompile Include="imgui_settings.h" />
     <ClCompile Include="SystemOptimizer.cpp" />
+    <ClCompile Include="RegistryTweaks.cpp" />
+    <ClCompile Include="NetworkTweaks.cpp" />
+    <ClCompile Include="ProcessTweaks.cpp" />
+    <ClCompile Include="SystemTweaks.cpp" />
+    <ClCompile Include="GraphicsTweaks.cpp" />
+    <ClCompile Include="BiosTweaks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\misc\debuggers\imgui.natvis">

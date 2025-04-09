@@ -132,6 +132,7 @@
       <AdditionalIncludeDirectories>..\..;..\..\backends;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -151,6 +152,7 @@
       <AdditionalIncludeDirectories>..\..;..\..\backends;%(AdditionalIncludeDirectories);</AdditionalIncludeDirectories>
       <BufferSecurityCheck>false</BufferSecurityCheck>
       <LanguageStandard>stdcpp17</LanguageStandard>
+      <AdditionalOptions>/utf-8 %(AdditionalOptions)</AdditionalOptions>
     </ClCompile>
     <Link>
       <GenerateDebugInformation>true</GenerateDebugInformation>
@@ -167,10 +169,16 @@
     <ClInclude Include="..\..\imgui_internal.h" />
     <ClInclude Include="..\..\backends\imgui_impl_dx11.h" />
     <ClInclude Include="..\..\backends\imgui_impl_win32.h" />
+    <ClInclude Include="BiosTweaks.h" />
     <ClInclude Include="definitions.h" />
     <ClInclude Include="Font.h" />
+    <ClInclude Include="GraphicsTweaks.h" />
     <ClInclude Include="main.h" />
+    <ClInclude Include="NetworkTweaks.h" />
+    <ClInclude Include="ProcessTweaks.h" />
+    <ClInclude Include="RegistryTweaks.h" />
     <ClInclude Include="SystemOptimizer.h" />
+    <ClInclude Include="SystemTweaks.h" />
   </ItemGroup>
   <ItemGroup>
     <ClCompile Include="..\..\imgui.cpp" />
@@ -179,9 +187,15 @@
     <ClCompile Include="..\..\imgui_widgets.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_dx11.cpp" />
     <ClCompile Include="..\..\backends\imgui_impl_win32.cpp" />
+    <ClCompile Include="BiosTweaks.cpp" />
+    <ClCompile Include="GraphicsTweaks.cpp" />
     <ClCompile Include="imgui_settings.h" />
     <ClCompile Include="main.cpp" />
+    <ClCompile Include="NetworkTweaks.cpp" />
+    <ClCompile Include="ProcessTweaks.cpp" />
+    <ClCompile Include="RegistryTweaks.cpp" />
     <ClCompile Include="SystemOptimizer.cpp" />
+    <ClCompile Include="SystemTweaks.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include="..\..\misc\debuggers\imgui.natvis" />
