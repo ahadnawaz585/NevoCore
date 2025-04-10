@@ -26,6 +26,17 @@ public:
     TweakResult enableRss();
     TweakResult disableUsbCoalescing();
     TweakResult optimizeNetwork();
+    // New Tweaks
+    TweakResult enableDirectCacheAccess();
+    TweakResult disableFlowControl();
+    TweakResult optimizeMtu();
+    TweakResult disableEnergyEfficientEthernet();
+    TweakResult enableInterruptModeration();
+    TweakResult disableLargeSendOffload();
+    TweakResult optimizeTcpWindowSize();
+    TweakResult disableNetAdapterPowerSaving();
+    TweakResult enableEcN();
+    TweakResult optimizeDscp();
     // Optimization Levels
     TweakResult applyBasicOptimizations();
     TweakResult applyAdvancedOptimizations();

@@ -40,6 +40,12 @@ public:
     TweakResult disableHDCP();               // Disable HDCP to reduce latency
     TweakResult disablePStates();            // Disable P-States to force high-performance state
     TweakResult disableNvidiaTelemetry();    // Disable NVIDIA Telemetry for privacy
+    TweakResult enableGsyncOptimizations();  // Optimize for G-Sync displays
+    TweakResult disableGpuIdleStates();      // Prevent GPU from entering idle states
+    TweakResult optimizeShaderPrecache();    // Optimize shader precaching
+    TweakResult enableFastVRAM();           // Enable faster VRAM access
+    TweakResult disableDriverOverhead();     // Reduce driver overhead
+    TweakResult optimizeDisplayPipeline();   // Optimize display pipeline
 
     // Restore Methods
     TweakResult restoreNvidiaGPU();           // Restore basic NVIDIA settings
@@ -50,6 +56,12 @@ public:
     TweakResult restoreHDCP();                // Restore HDCP settings
     TweakResult restorePStates();             // Restore P-States settings
     TweakResult restoreNvidiaTelemetry();     // Restore NVIDIA Telemetry settings
+    TweakResult restoreGsyncOptimizations();  // Restore G-Sync settings
+    TweakResult restoreGpuIdleStates();       // Restore GPU idle states
+    TweakResult restoreShaderPrecache();      // Restore shader precache settings
+    TweakResult restoreFastVRAM();           // Restore VRAM access settings
+    TweakResult restoreDriverOverhead();      // Restore driver overhead settings
+    TweakResult restoreDisplayPipeline();     // Restore display pipeline settings
 
     // Optimization Levels
     TweakResult applyBasicOptimizations();    // Basic optimization level

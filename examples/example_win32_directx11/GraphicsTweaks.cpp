@@ -500,7 +500,6 @@ TweakResult GraphicsTweaks::disableNvidiaTelemetry() {
     HKEY hKey;
     LONG regResult;
 
-    // Disable telemetry services in registry
     regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\NVIDIA Corporation\\NvControlPanel2\\Client",
         0, KEY_SET_VALUE, &hKey);
     if (regResult == ERROR_SUCCESS) {
@@ -524,7 +523,6 @@ TweakResult GraphicsTweaks::disableNvidiaTelemetry() {
         parent.logger->error("Failed to open NvControlPanel2 key: Error {}", regResult);
     }
 
-    // Disable telemetry tasks
     regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SOFTWARE\\Microsoft\\Windows NT\\CurrentVersion\\Schedule\\TaskCache\\Tree\\NVIDIA",
         0, KEY_SET_VALUE, &hKey);
     if (regResult == ERROR_SUCCESS) {
@@ -546,6 +544,180 @@ TweakResult GraphicsTweaks::disableNvidiaTelemetry() {
         result.success = false;
         result.message += "Failed to open telemetry task key: Error " + std::to_string(regResult) + "\n";
         parent.logger->error("Failed to open telemetry task key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::enableGsyncOptimizations() {
+    TweakResult result = { true, "Optimizing G-Sync settings...\n", 0, 2 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e968-e325-11ce-bfc1-08002be10318}\\0000",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        struct Setting { DWORD value; const char* key; const char* desc; };
+        Setting settings[] = {
+            {1, "GsyncMode", "Enabled G-Sync full optimization"},
+            {0, "GsyncLatencyOptimize", "Optimized G-Sync latency"}
+        };
+        for (const auto& setting : settings) {
+            regResult = RegSetValueExA(hKey, setting.key, 0, REG_DWORD, (BYTE*)&setting.value, sizeof(DWORD));
+            if (regResult == ERROR_SUCCESS) {
+                result.tweaksApplied++;
+                result.message += std::string(setting.desc) + ".\n";
+                parent.logger->info(setting.desc);
+            }
+            else {
+                result.success = false;
+                result.message += std::string("Failed to set ") + setting.key + ": Error " + std::to_string(regResult) + "\n";
+                parent.logger->error("Failed to set {}: Error {}", setting.key, regResult);
+            }
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open NVIDIA registry key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open NVIDIA registry key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::disableGpuIdleStates() {
+    TweakResult result = { true, "Disabling GPU idle states...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        DWORD value = 0; // 0 = Disable idle states
+        regResult = RegSetValueExA(hKey, "IdleStateTimeout", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+        if (regResult == ERROR_SUCCESS) {
+            result.tweaksApplied++;
+            result.message += "Disabled GPU idle states for consistent performance.\n";
+            parent.logger->info("Disabled GPU idle states for consistent performance");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to disable GPU idle states: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to disable GPU idle states: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::optimizeShaderPrecache() {
+    TweakResult result = { true, "Optimizing shader precache...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e968-e325-11ce-bfc1-08002be10318}\\0000",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        DWORD value = 2; // 2 = Optimize precache size
+        regResult = RegSetValueExA(hKey, "ShaderCacheSize", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+        if (regResult == ERROR_SUCCESS) {
+            result.tweaksApplied++;
+            result.message += "Optimized shader precache size.\n";
+            parent.logger->info("Optimized shader precache size");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to optimize shader precache: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to optimize shader precache: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open NVIDIA registry key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open NVIDIA registry key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::enableFastVRAM() {
+    TweakResult result = { true, "Enabling fast VRAM access...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        DWORD value = 1; // 1 = Enable fast VRAM access
+        regResult = RegSetValueExA(hKey, "VRAMFastAccess", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+        if (regResult == ERROR_SUCCESS) {
+            result.tweaksApplied++;
+            result.message += "Enabled fast VRAM access for improved performance.\n";
+            parent.logger->info("Enabled fast VRAM access for improved performance");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to enable fast VRAM: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to enable fast VRAM: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::disableDriverOverhead() {
+    TweakResult result = { true, "Reducing driver overhead...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        DWORD value = 0; // 0 = Minimize driver overhead
+        regResult = RegSetValueExA(hKey, "DriverOverheadReduction", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+        if (regResult == ERROR_SUCCESS) {
+            result.tweaksApplied++;
+            result.message += "Reduced driver overhead for better efficiency.\n";
+            parent.logger->info("Reduced driver overhead for better efficiency");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to reduce driver overhead: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to reduce driver overhead: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::optimizeDisplayPipeline() {
+    TweakResult result = { true, "Optimizing display pipeline...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        DWORD value = 1; // 1 = Optimize pipeline
+        regResult = RegSetValueExA(hKey, "DisplayPipelineOptimization", 0, REG_DWORD, (BYTE*)&value, sizeof(value));
+        if (regResult == ERROR_SUCCESS) {
+            result.tweaksApplied++;
+            result.message += "Optimized display pipeline for better performance.\n";
+            parent.logger->info("Optimized display pipeline for better performance");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to optimize display pipeline: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to optimize display pipeline: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
     }
     return result;
 }
@@ -625,7 +797,7 @@ TweakResult GraphicsTweaks::restoreAdvancedGraphicsSettings() {
     else {
         result.success = false;
         result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
-        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+        parent.logger->error("Failed to open GraphicsDrivers Delegate key: Error {}", regResult);
     }
 
     regResult = RegOpenKeyExA(HKEY_CURRENT_USER, "Software\\Microsoft\\Windows\\DWM",
@@ -825,6 +997,171 @@ TweakResult GraphicsTweaks::restoreNvidiaTelemetry() {
     return result;
 }
 
+TweakResult GraphicsTweaks::restoreGsyncOptimizations() {
+    TweakResult result = { true, "Restoring G-Sync settings...\n", 0, 2 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e968-e325-11ce-bfc1-08002be10318}\\0000",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        const char* values[] = { "GsyncMode", "GsyncLatencyOptimize" };
+        for (const char* value : values) {
+            regResult = RegDeleteValueA(hKey, value);
+            if (regResult == ERROR_SUCCESS || regResult == ERROR_FILE_NOT_FOUND) {
+                result.tweaksApplied++;
+                result.message += std::string("Restored ") + value + " to default.\n";
+                parent.logger->info("Restored {} to default", value);
+            }
+            else {
+                result.success = false;
+                result.message += std::string("Failed to restore ") + value + ": Error " + std::to_string(regResult) + "\n";
+                parent.logger->error("Failed to restore {}: Error {}", value, regResult);
+            }
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open NVIDIA registry key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open NVIDIA registry key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::restoreGpuIdleStates() {
+    TweakResult result = { true, "Restoring GPU idle states...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        regResult = RegDeleteValueA(hKey, "IdleStateTimeout");
+        if (regResult == ERROR_SUCCESS || regResult == ERROR_FILE_NOT_FOUND) {
+            result.tweaksApplied++;
+            result.message += "Restored GPU idle state settings.\n";
+            parent.logger->info("Restored GPU idle state settings");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to restore GPU idle states: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to restore GPU idle states: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::restoreShaderPrecache() {
+    TweakResult result = { true, "Restoring shader precache...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\Class\\{4d36e968-e325-11ce-bfc1-08002be10318}\\0000",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        regResult = RegDeleteValueA(hKey, "ShaderCacheSize");
+        if (regResult == ERROR_SUCCESS || regResult == ERROR_FILE_NOT_FOUND) {
+            result.tweaksApplied++;
+            result.message += "Restored shader precache settings.\n";
+            parent.logger->info("Restored shader precache settings");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to restore shader precache: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to restore shader precache: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open NVIDIA registry key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open NVIDIA registry key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::restoreFastVRAM() {
+    TweakResult result = { true, "Restoring VRAM access settings...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        regResult = RegDeleteValueA(hKey, "VRAMFastAccess");
+        if (regResult == ERROR_SUCCESS || regResult == ERROR_FILE_NOT_FOUND) {
+            result.tweaksApplied++;
+            result.message += "Restored VRAM access settings.\n";
+            parent.logger->info("Restored VRAM access settings");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to restore VRAM access: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to restore VRAM access: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::restoreDriverOverhead() {
+    TweakResult result = { true, "Restoring driver overhead settings...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        regResult = RegDeleteValueA(hKey, "DriverOverheadReduction");
+        if (regResult == ERROR_SUCCESS || regResult == ERROR_FILE_NOT_FOUND) {
+            result.tweaksApplied++;
+            result.message += "Restored driver overhead settings.\n";
+            parent.logger->info("Restored driver overhead settings");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to restore driver overhead: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to restore driver overhead: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
+TweakResult GraphicsTweaks::restoreDisplayPipeline() {
+    TweakResult result = { true, "Restoring display pipeline settings...\n", 0, 1 };
+    HKEY hKey;
+    LONG regResult = RegOpenKeyExA(HKEY_LOCAL_MACHINE, "SYSTEM\\CurrentControlSet\\Control\\GraphicsDrivers",
+        0, KEY_SET_VALUE, &hKey);
+    if (regResult == ERROR_SUCCESS) {
+        regResult = RegDeleteValueA(hKey, "DisplayPipelineOptimization");
+        if (regResult == ERROR_SUCCESS || regResult == ERROR_FILE_NOT_FOUND) {
+            result.tweaksApplied++;
+            result.message += "Restored display pipeline settings.\n";
+            parent.logger->info("Restored display pipeline settings");
+        }
+        else {
+            result.success = false;
+            result.message += "Failed to restore display pipeline: Error " + std::to_string(regResult) + "\n";
+            parent.logger->error("Failed to restore display pipeline: Error {}", regResult);
+        }
+        RegCloseKey(hKey);
+    }
+    else {
+        result.success = false;
+        result.message += "Failed to open GraphicsDrivers key: Error " + std::to_string(regResult) + "\n";
+        parent.logger->error("Failed to open GraphicsDrivers key: Error {}", regResult);
+    }
+    return result;
+}
+
 // Optimization Levels
 TweakResult GraphicsTweaks::applyBasicOptimizations() {
     TweakResult r1 = optimizeNvidiaGPU();
@@ -865,17 +1202,26 @@ TweakResult GraphicsTweaks::applyExtremeOptimizations() {
     TweakResult r15 = disableHDCP();
     TweakResult r16 = disablePStates();
     TweakResult r17 = disableNvidiaTelemetry();
+    TweakResult r18 = enableGsyncOptimizations();
+    TweakResult r19 = disableGpuIdleStates();
+    TweakResult r20 = optimizeShaderPrecache();
+    TweakResult r21 = enableFastVRAM();
+    TweakResult r22 = disableDriverOverhead();
+    TweakResult r23 = optimizeDisplayPipeline();
     TweakResult result = { r1.success && r2.success && r3.success && r4.success && r5.success && r6.success &&
                           r7.success && r8.success && r9.success && r10.success && r11.success && r12.success &&
-                          r13.success && r14.success && r15.success && r16.success && r17.success,
+                          r13.success && r14.success && r15.success && r16.success && r17.success && r18.success &&
+                          r19.success && r20.success && r21.success && r22.success && r23.success,
                           r1.message + r2.message + r3.message + r4.message + r5.message + r6.message +
                           r7.message + r8.message + r9.message + r10.message + r11.message + r12.message +
-                          r13.message + r14.message + r15.message + r16.message + r17.message,
+                          r13.message + r14.message + r15.message + r16.message + r17.message + r18.message +
+                          r19.message + r20.message + r21.message + r22.message + r23.message,
                           r1.tweaksApplied + r2.tweaksApplied + r3.tweaksApplied + r4.tweaksApplied +
                           r5.tweaksApplied + r6.tweaksApplied + r7.tweaksApplied + r8.tweaksApplied +
                           r9.tweaksApplied + r10.tweaksApplied + r11.tweaksApplied + r12.tweaksApplied +
                           r13.tweaksApplied + r14.tweaksApplied + r15.tweaksApplied + r16.tweaksApplied +
-                          r17.tweaksApplied, 21 };
+                          r17.tweaksApplied + r18.tweaksApplied + r19.tweaksApplied + r20.tweaksApplied +
+                          r21.tweaksApplied + r22.tweaksApplied + r23.tweaksApplied, 27 };
     return result;
 }
 
@@ -888,11 +1234,21 @@ TweakResult GraphicsTweaks::restoreDefaults() {
     TweakResult r6 = restoreHDCP();
     TweakResult r7 = restorePStates();
     TweakResult r8 = restoreNvidiaTelemetry();
+    TweakResult r9 = restoreGsyncOptimizations();
+    TweakResult r10 = restoreGpuIdleStates();
+    TweakResult r11 = restoreShaderPrecache();
+    TweakResult r12 = restoreFastVRAM();
+    TweakResult r13 = restoreDriverOverhead();
+    TweakResult r14 = restoreDisplayPipeline();
     TweakResult result = { r1.success && r2.success && r3.success && r4.success && r5.success && r6.success &&
-                          r7.success && r8.success,
+                          r7.success && r8.success && r9.success && r10.success && r11.success && r12.success &&
+                          r13.success && r14.success,
                           r1.message + r2.message + r3.message + r4.message + r5.message + r6.message +
-                          r7.message + r8.message,
+                          r7.message + r8.message + r9.message + r10.message + r11.message + r12.message +
+                          r13.message + r14.message,
                           r1.tweaksApplied + r2.tweaksApplied + r3.tweaksApplied + r4.tweaksApplied +
-                          r5.tweaksApplied + r6.tweaksApplied + r7.tweaksApplied + r8.tweaksApplied, 25 };
+                          r5.tweaksApplied + r6.tweaksApplied + r7.tweaksApplied + r8.tweaksApplied +
+                          r9.tweaksApplied + r10.tweaksApplied + r11.tweaksApplied + r12.tweaksApplied +
+                          r13.tweaksApplied + r14.tweaksApplied, 31 };
     return result;
 }

@@ -17,37 +17,57 @@ public:
     TweakResult applyPowerSettings();
     TweakResult manageInterruptSteering();
     // Advanced Tweaks
-    TweakResult disableHpet();           // New
-    TweakResult optimizeFullscreen();    // New
+    TweakResult disableHpet();
+    TweakResult optimizeFullscreen();
     // Extreme Tweaks
-    TweakResult applyMmcssTweaks();      // New
+    TweakResult applyMmcssTweaks();
     // Restore Methods
     TweakResult restorePowerSettings();
     TweakResult restoreInterruptSteering();
-    TweakResult restoreHpet();           // New
-    TweakResult restoreFullscreen();     // New
-    TweakResult restoreMmcssTweaks();    // New
+    TweakResult restoreHpet();
+    TweakResult restoreFullscreen();
+    TweakResult restoreMmcssTweaks();
     // Optimization Levels
     TweakResult applyBasicOptimizations();
     TweakResult applyAdvancedOptimizations();
     TweakResult applyExtremeOptimizations();
     TweakResult restoreDefaults();
-    TweakResult disableBluetooth();        // New
-    TweakResult disableHyperV();           // New
-    TweakResult disableUselessServices();  // New
+    TweakResult disableBluetooth();
+    TweakResult disableHyperV();
+    TweakResult disableUselessServices();
     TweakResult disableUselessFeatures();
     TweakResult disableLegacySupport();
-    TweakResult adjustAudioLatency();         // New tweak #11 added here
-    TweakResult disableSleepStudy();          // New tweak #14 added here
-    TweakResult applyTimerRes();              // New tweak #18 added here
-    TweakResult disableXhciInterruptModeration(); // New tweak #19 added here
-    TweakResult optimizeAmdCpu();             // New tweak #20 added here
-    TweakResult optimizeMsi();                // New tweak #22 added here
-    TweakResult configureBcdEdit();           // New tweak #23 added here
-    TweakResult disableHibernation();         // New tweak #24 added here
-    TweakResult disableDriverUsbPowersavings(); // New tweak #27 added here
-    TweakResult optimizeCpu();                // New tweak #28 added here
+    TweakResult adjustAudioLatency();
+    TweakResult disableSleepStudy();
+    TweakResult applyTimerRes();
+    TweakResult disableXhciInterruptModeration();
+    TweakResult optimizeAmdCpu();
+    TweakResult optimizeMsi();
+    TweakResult configureBcdEdit();
+    TweakResult disableHibernation();
+    TweakResult disableDriverUsbPowersavings();
+    TweakResult optimizeCpu();
     TweakResult optimizeCpuBoostState();
+    // New Tweaks
+    TweakResult enableMemoryCompression();
+    TweakResult optimizeNetworkThrottling();
+    TweakResult disableSuperfetch();
+    TweakResult optimizePageFile();
+    TweakResult disableWindowsDefender();
+    TweakResult optimizeThreadPriority();
+    TweakResult disableBackgroundApps();
+    TweakResult optimizeStorage();
+    TweakResult disableMitigations();
+    // New Restore Methods
+    TweakResult restoreMemoryCompression();
+    TweakResult restoreNetworkThrottling();
+    TweakResult restoreSuperfetch();
+    TweakResult restorePageFile();
+    TweakResult restoreWindowsDefender();
+    TweakResult restoreThreadPriority();
+    TweakResult restoreBackgroundApps();
+    TweakResult restoreStorage();
+    TweakResult restoreMitigations();
 };
 
 #endif
