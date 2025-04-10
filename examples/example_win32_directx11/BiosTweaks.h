@@ -19,6 +19,19 @@ public:
     TweakResult disableLegacySupport();              // Advanced (OS-level support)
     TweakResult enableAdvancedConfig();              // Extreme
     TweakResult enableHiddenSettings();              // Extreme (Experimental)
+    // New Basic Tweaks
+    TweakResult enableFastBoot();                    // Basic
+    TweakResult setBootPriorityToSSD();              // Basic
+    // New Advanced Tweaks
+    TweakResult optimizeFanCurves();                 // Advanced
+    TweakResult enableAbove4GDecoding();             // Advanced
+    TweakResult adjustCpuCacheRatio();               // Advanced
+    // New Extreme Tweaks
+    TweakResult disableHyperThreading();             // Extreme
+    TweakResult enablePBO();                         // Extreme
+    TweakResult increasePCIeSpeed();                 // Extreme
+    TweakResult disableOnboardAudio();               // Extreme
+    TweakResult adjustDRAMVoltage();                 // Extreme
     TweakResult applyBasicOptimizations();
     TweakResult applyAdvancedOptimizations();
     TweakResult applyExtremeOptimizations();
